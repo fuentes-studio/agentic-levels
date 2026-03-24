@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 Levels of Agentic Engineering</title>
+<meta name="description" content="Assess your current level of agentic engineering mastery — from tab complete to autonomous agent teams.">
+<meta property="og:title" content="8 Levels of Agentic Engineering">
+<meta property="og:description" content="AI&#39;s coding ability is outpacing our ability to wield it. Find out where you stand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── TOKENS ── */
+:root {
+  --bg:      #fbfbfc;
+  --bg-2:    #f4f3f7;
+  --bg-3:    #eceaf0;
+  --border:  #dedee2;
+  --border-2:#ccccd2;
+  --text:    #1c1b20;
+  --text-2:  #5b5969;
+  --text-3:  #9e9aa8;
+  --accent:  #FCB116;
+  --accent-d:rgba(252,177,22,0.10);
+  --accent-h:#e8a30c;
+  --primary: #4973cf;
+  --l1:#9e9aa8; --l2:#5d95ee; --l3:#2da3cc;
+  --l4:#a6781c; --l5:#196EFA; --l6:#00a855;
+  --l7:#e8a30c; --l8:#FD542F;
+  --ff: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ff-m: 'SF Mono', Monaco, Consolas, monospace;
+  --r: 8px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+body.dark {
+  --bg:      #131317;
+  --bg-2:    #1b1b21;
+  --bg-3:    #242429;
+  --border:  #2e2e36;
+  --border-2:#3a3a44;
+  --text:    #e8e7ec;
+  --text-2:  #9e9ab0;
+  --text-3:  #5a5868;
+}
+
+/* ── BASE ── */
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff);
+  font-size: 16.5px;
+  font-weight: 300;
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s, color .2s;
+}
+a { color: inherit; text-decoration: none; }
+.view { display: none; min-height: 100vh; flex-direction: column; }
+.view.active { display: flex; }
+
+/* ── NAV ── */
+.app-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 40px;
+  background: rgba(251,251,252,0.93);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: background .2s, border-color .2s;
+}
+body.dark .app-nav { background: rgba(19,19,23,0.93); }
+.nav-logo {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-3); cursor: pointer; transition: color .15s;
+}
+.nav-logo:hover { color: var(--text-2); }
+.nav-links { display: flex; gap: 18px; align-items: center; }
+.nav-link {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  color: var(--text-3); cursor: pointer; transition: color .15s;
+}
+.nav-link:hover { color: var(--text); }
+.nav-badge {
+  font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  background: var(--accent-d); border: 1px solid var(--accent);
+  color: var(--accent); display: none; letter-spacing: 0.08em;
+}
+.nav-icon-btn {
+  font-family: var(--ff); font-size: 11px; font-weight: 500;
+  padding: 4px 10px; border-radius: 5px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--text-3); cursor: pointer; transition: all .15s;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.nav-icon-btn:hover { color: var(--text); border-color: var(--border-2); }
+
+/* ── BUTTONS ── */
+.btn {
+  font-family: var(--ff); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 10px 20px; border-radius: var(--r);
+  cursor: pointer; border: none; transition: all .2s var(--ease);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary { background: var(--accent); color: #0b0a08; }
+.btn-primary:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(252,177,22,0.28); }
+.btn-secondary { background: transparent; color: var(--text-2); border: 1px solid var(--border); }
+.btn-secondary:hover { color: var(--text); border-color: var(--border-2); background: var(--bg-2); }
+.btn:disabled { opacity: .38; cursor: not-allowed; }
+.btn:disabled:hover { transform: none; box-shadow: none; }
+
+/* ── INTRO ── */
+#view-intro { background: var(--bg); position: relative; overflow: hidden; }
+#view-intro::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 8% 85%, rgba(252,177,22,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 45% at 90% 12%, rgba(73,115,207,0.05) 0%, transparent 55%);
+}
+.intro-wrap {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 100vh; max-width: 1200px;
+  margin: 0 auto; padding: 56px 48px 130px;
+  gap: 56px; align-items: center;
+}
+.intro-label { font-size: 11px; font-weight: 500; letter-spacing: 0.20em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+.intro-title { font-size: clamp(2.2rem, 3.6vw, 3.2rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; }
+.intro-title em { font-style: normal; color: var(--accent); }
+.intro-desc { font-size: 17px; font-weight: 300; color: var(--text-2); line-height: 1.75; max-width: 380px; margin-bottom: 36px; }
+.intro-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.stair-wrap { display: flex; align-items: center; justify-content: center; }
+@keyframes stair-in { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ── HTML STAIR ── */
+.stair-html { position: relative; width: 555px; height: 364px; overflow: visible; }
+.stair-outer {
+  position: absolute;
+  opacity: 0;
+  animation: stair-in .55s var(--ease) forwards;
+  transition: transform .55s var(--ease);
+  z-index: 1;
+}
+.stair-outer.hov { z-index: 10; }
+.stair-inner {
+  height: 40px; border-radius: 6px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 13px 11px; cursor: pointer; overflow: hidden;
+  transition: height .55s var(--ease);
+}
+.stair-inner.expanded { height: 54px; }
+.stair-pill { display: flex; align-items: center; gap: 7px; flex-shrink: 0; line-height: 1; }
+.stair-sn { font-size: 10px; font-weight: 500; color: rgba(255,255,255,.45); }
+.stair-sl { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.9); }
+.stair-tag {
+  font-size: 11px; font-weight: 400; line-height: 1.35;
+  color: rgba(255,255,255,.78); padding-bottom: 6px; flex-shrink: 0;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity .3s var(--ease) .15s, transform .4s var(--ease) .15s;
+}
+.stair-inner.expanded .stair-tag { opacity: 1; transform: translateY(0); }
+
+/* ── QUIZ ── */
+#view-quiz { background: var(--bg); }
+.quiz-body { flex: 1; display: flex; align-items: center; padding: 40px 40px 120px; }
+.quiz-inner { max-width: 600px; width: 100%; margin: 0 auto; }
+.quiz-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.quiz-label { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.quiz-counter { font-size: 11px; font-weight: 500; color: var(--text-3); letter-spacing: 0.08em; }
+.quiz-track { height: 2px; background: var(--border); border-radius: 2px; margin-bottom: 40px; overflow: hidden; }
+.quiz-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .4s var(--spring); }
+.quiz-q { font-size: clamp(1.35rem, 2.8vw, 1.8rem); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 26px; }
+.quiz-opts { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt {
+  padding: 14px 22px; border-radius: var(--r);
+  border: 1px solid var(--border); background: var(--bg);
+  cursor: pointer; font-size: 15px; font-weight: 300;
+  color: var(--text-2); transition: all .15s; text-align: left;
+  font-family: var(--ff); line-height: 1.55; width: 100%;
+  display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;
+}
+.quiz-opt:hover { border-color: var(--accent); color: var(--text); background: var(--bg-2); }
+.quiz-opt.sel { border-color: var(--accent); background: var(--accent-d); color: var(--text); }
+.quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; }
+
+/* ── RESULT TABS ── */
+.result-wrap { max-width: 860px; margin: 0 auto; padding: 52px 40px; width: 100%; }
+.rtab-bar {
+  display: flex; gap: 2px; margin-bottom: 36px;
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 4px; overflow-x: auto;
+}
+.rtab {
+  font-family: var(--ff); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 7px; cursor: pointer;
+  color: var(--text-3); transition: all .15s var(--ease);
+  border: none; background: transparent; white-space: nowrap;
+}
+.rtab:hover { color: var(--text-2); }
+.rtab.active { background: var(--bg); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.07); }
+body.dark .rtab.active { box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.rtab-panel { display: none; }
+.rtab-panel.active { display: block; }
+
+/* overview */
+.result-hero { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 28px; }
+.result-badge {
+  flex-shrink: 0; width: 92px; height: 92px; border-radius: 12px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  border: 1px solid var(--border);
+}
+.result-badge-n { font-size: 38px; font-weight: 700; line-height: 1; }
+.result-badge-w { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+.result-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 5px; }
+.result-name { font-size: 2rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 9px; }
+.result-tagline { font-size: 16px; font-weight: 300; color: var(--text-2); line-height: 1.7; }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.result-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; }
+.result-card-h { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); margin-bottom: 11px; }
+.result-card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.result-card li { font-size: 14px; font-weight: 300; color: var(--text-2); padding-left: 14px; position: relative; line-height: 1.55; }
+.result-card li::before { content: '–'; position: absolute; left: 0; color: var(--text-3); }
+.next-box {
+  border-radius: var(--r); padding: 18px; margin-bottom: 22px;
+  border: 1px solid var(--border); border-left-width: 3px; background: var(--bg-2);
+}
+.next-box-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+.next-box-name { font-size: 15px; font-weight: 600; margin-bottom: 7px; }
+.next-box-text { font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.65; }
+.result-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn {
+  font-family: var(--ff); font-size: 12px; font-weight: 500;
+  padding: 10px 20px; border-radius: var(--r); cursor: pointer;
+  border: 1px solid var(--accent); background: transparent;
+  color: var(--accent); transition: all .2s var(--ease); letter-spacing: 0.06em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.share-btn:hover { background: var(--accent); color: #0b0a08; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(252,177,22,.28); }
+.share-btn.ok { color: #00a855; border-color: #00a855; background: rgba(0,168,85,.09); transform: none; box-shadow: none; }
+
+/* gaps tab */
+.tab-intro { font-size: 15px; font-weight: 300; color: var(--text-2); line-height: 1.7; margin-bottom: 26px; max-width: 560px; }
+.gap-section { margin-bottom: 10px; border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
+.gap-cat-head { display: flex; align-items: center; gap: 10px; padding: 12px 15px; background: var(--bg-2); border-bottom: 1px solid var(--border); }
+.gap-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.gap-cat-name { font-size: 11px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-2); }
+.gap-status {
+  margin-left: auto; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 4px; font-family: var(--ff);
+}
+.gap-status.gap { background: rgba(253,84,47,0.08); color: #FD542F; }
+.gap-status.partial { background: rgba(232,163,12,0.10); color: #c78a00; }
+.gap-status.strong { background: rgba(0,168,85,0.09); color: #00a855; }
+.gap-items { background: var(--bg); }
+.gap-item { font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.55; padding: 10px 15px 10px 34px; position: relative; border-bottom: 1px solid var(--border); }
+.gap-item:last-child { border-bottom: none; }
+.gap-item::before { content: ''; position: absolute; left: 15px; top: 16px; width: 5px; height: 5px; border-radius: 50%; background: var(--text-3); }
+
+/* plan tab */
+.plan-sec { margin-bottom: 30px; }
+.plan-sec-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.plan-icon { width: 26px; height: 26px; border-radius: 6px; background: var(--bg-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; color: var(--text-2); }
+.plan-sec-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2); }
+.plan-items { display: flex; flex-direction: column; gap: 7px; }
+.plan-item { display: flex; gap: 10px; padding: 12px 14px; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); font-size: 15px; font-weight: 300; color: var(--text-2); line-height: 1.55; align-items: flex-start; }
+.plan-n { flex-shrink: 0; width: 19px; height: 19px; border-radius: 50%; background: var(--bg-3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; color: var(--text-3); margin-top: 2px; }
+.plan-item a { color: var(--primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.plan-item a:hover { color: var(--text); }
+.res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+.res-card { padding: 13px; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); cursor: pointer; text-decoration: none; transition: all .15s; display: flex; flex-direction: column; gap: 3px; }
+.res-card:hover { border-color: var(--accent); background: var(--bg-3); }
+.res-type { font-size: 9px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.res-title { font-size: 13px; font-weight: 400; color: var(--text); }
+.res-src { font-size: 11px; font-weight: 300; color: var(--text-3); }
+
+/* prompts tab */
+.prompt-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 10px; }
+.prompt-card-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; gap: 10px; cursor: pointer; transition: background .15s; }
+.prompt-card-head:hover { background: var(--bg-3); }
+.prompt-card.open .prompt-card-head { border-bottom: 1px solid var(--border); }
+.prompt-card-name { font-size: 12px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text); }
+.prompt-card-desc { font-size: 12px; font-weight: 300; color: var(--text-3); flex: 1; }
+.prompt-card-chevron { font-size: 11px; color: var(--text-3); transition: transform .2s; flex-shrink: 0; }
+.prompt-card.open .prompt-card-chevron { transform: rotate(180deg); }
+.prompt-body { display: none; padding: 14px 15px; font-size: 12px; font-weight: 400; line-height: 1.75; color: var(--text-2); font-family: var(--ff-m); white-space: pre-wrap; max-height: 280px; overflow-y: auto; background: var(--bg); }
+.prompt-card.open .prompt-body { display: block; }
+/* plan expand */
+.plan-item.has-detail { cursor: pointer; }
+.plan-item.has-detail:hover { background: var(--bg-3); }
+.plan-detail { display: none; font-size: 12.5px; font-weight: 300; color: var(--text-3); line-height: 1.65; padding-top: 7px; border-top: 1px solid var(--border); margin-top: 7px; }
+.plan-detail a { color: var(--primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.plan-item.open .plan-detail { display: block; }
+.plan-item-chevron { margin-left: auto; font-size: 10px; color: var(--text-3); flex-shrink: 0; transition: transform .2s; }
+.plan-item.open .plan-item-chevron { transform: rotate(180deg); }
+.copy-btn { font-family: var(--ff); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 5px; background: transparent; border: 1px solid var(--border); color: var(--text-2); cursor: pointer; transition: all .15s; flex-shrink: 0; }
+.copy-btn:hover { color: var(--text); border-color: var(--border-2); }
+.copy-btn.ok { color: #00a855; border-color: #00a855; }
+
+/* harness tab */
+.harness-block { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; }
+.harness-block-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid var(--border); }
+.harness-block-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-2); }
+.harness-code { padding: 15px; font-size: 12px; font-weight: 400; line-height: 1.7; color: var(--text-2); font-family: var(--ff-m); white-space: pre; overflow-x: auto; background: var(--bg); }
+.h-divider { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin: 26px 0 18px; display: flex; align-items: center; gap: 12px; }
+.h-divider::before, .h-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.ifield-label { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); margin-bottom: 5px; margin-top: 12px; }
+.ifield-label:first-of-type { margin-top: 0; }
+.ifield { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 10px 13px; color: var(--text-2); font-family: var(--ff); font-size: 13px; font-weight: 300; line-height: 1.6; resize: vertical; min-height: 60px; transition: border-color .15s; }
+.ifield:focus { outline: none; border-color: var(--accent); color: var(--text); }
+.insights-out { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); padding: 16px; margin-top: 12px; font-size: 13.5px; font-weight: 300; color: var(--text-2); line-height: 1.75; white-space: pre-wrap; max-height: 400px; overflow-y: auto; display: none; }
+.spinner { width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .6s linear infinite; display: inline-block; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── EXPLORE ── */
+.explore-wrap { max-width: 1100px; margin: 0 auto; padding: 52px 40px; width: 100%; }
+.explore-h { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 5px; }
+.explore-sub { font-size: 14px; font-weight: 300; color: var(--text-2); margin-bottom: 36px; }
+.level-track { margin-bottom: 36px; }
+.lvl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.lvl-card { border-radius: var(--r); border: 1px solid var(--border); background: var(--bg-2); padding: 19px; cursor: pointer; transition: all .2s var(--ease); position: relative; overflow: hidden; border-top-width: 3px; border-top-style: solid; }
+.lvl-card:hover { background: var(--bg-3); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.05); }
+.lvl-card.yours { box-shadow: 0 0 0 2px var(--accent); }
+.lvl-card.yours::after { content: 'YOU'; position: absolute; top: 10px; right: 10px; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); }
+.lvl-n { font-size: 10px; font-weight: 500; letter-spacing: 0.13em; color: var(--text-3); margin-bottom: 4px; }
+.lvl-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 5px; }
+.lvl-brief { font-size: 12px; font-weight: 300; color: var(--text-2); line-height: 1.5; }
+
+/* ── LEVEL DETAIL ── */
+.ldet-wrap { max-width: 780px; margin: 0 auto; padding: 52px 40px; width: 100%; }
+.ldet-num { font-size: 80px; font-weight: 700; line-height: 0.85; opacity: .07; letter-spacing: -0.04em; margin-bottom: 4px; }
+.ldet-name { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 10px; }
+.ldet-tagline { font-size: 16px; font-weight: 300; color: var(--text-2); line-height: 1.7; max-width: 500px; margin-bottom: 40px; }
+.ldet-sec { margin-bottom: 26px; }
+.ldet-sec-title { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 10px; }
+.ldet-blurb { font-size: 15px; font-weight: 300; color: var(--text-2); line-height: 1.78; background: var(--bg-2); border-left: 3px solid var(--border); padding: 15px 19px; border-radius: 0 var(--r) var(--r) 0; }
+.ldet-items { display: flex; flex-direction: column; gap: 7px; }
+.ldet-item { display: flex; gap: 9px; font-size: 15px; font-weight: 300; color: var(--text-2); align-items: flex-start; line-height: 1.55; }
+.ldet-dot { flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; margin-top: 9px; }
+.ldet-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border); }
+
+/* ── SHARED RESULT VIEW ── */
+#view-shared { background: var(--bg); }
+.shared-wrap {
+  min-height: calc(100vh - 60px); display: flex; align-items: center; justify-content: center;
+  padding: 40px 24px;
+}
+.shared-card {
+  max-width: 540px; width: 100%;
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 48px 44px 44px;
+}
+.shared-badge {
+  width: 72px; height: 72px; border-radius: 14px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  margin-bottom: 28px; border: 1px solid rgba(255,255,255,.08);
+}
+.shared-badge-n { font-size: 30px; font-weight: 700; line-height: 1; color: #fff; }
+.shared-badge-w { font-size: 8px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-top: 2px; }
+.shared-label { font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+.shared-name { font-size: 2rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 10px; }
+.shared-tagline { font-size: 17px; font-weight: 300; color: var(--text-2); line-height: 1.7; margin-bottom: 22px; }
+.shared-summary { font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.75; padding: 15px 18px; background: var(--bg); border: 1px solid var(--border); border-left-width: 3px; border-radius: 0 var(--r) var(--r) 0; margin-bottom: 32px; }
+.shared-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+.shared-source { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 20px; border-top: 1px solid var(--border); }
+.shared-source-label { font-size: 11px; font-weight: 300; color: var(--text-3); }
+.shared-source a { font-size: 11px; font-weight: 500; color: var(--text-2); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; transition: color .15s; }
+.shared-source a:hover { color: var(--text); }
+.shared-built-by { font-size: 11px; font-weight: 500; color: var(--text-3); text-decoration: none; transition: color .15s; }
+.shared-built-by:hover { color: var(--text-2); }
+
+/* ── UTILS ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+
+/* ── CONGRATS BANNER ── */
+.congrats-banner {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 18px; border-radius: var(--r);
+  border: 1px solid; margin-bottom: 24px;
+  animation: congrats-in .5s var(--ease) both;
+  overflow: hidden;
+}
+@keyframes congrats-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.congrats-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.congrats-inner { display: flex; align-items: center; gap: 10px; flex: 1; transition: opacity .25s ease, transform .3s var(--ease); }
+.congrats-label { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; flex-shrink: 0; }
+.congrats-text { font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.5; }
+
+/* ── BUILT-BY CREDIT ── */
+.built-by {
+  position: fixed; bottom: 14px; right: 18px; z-index: 200;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.06em;
+  color: var(--text-3); opacity: 0.55; transition: opacity .15s;
+  pointer-events: auto;
+}
+.built-by:hover { opacity: 1; }
+.built-by a { color: inherit; text-decoration: none; }
+.built-by a:hover { color: var(--text-2); }
+
+/* ── HOVER EXPAND (explore cards) ── */
+.lvl-expand { max-height: 0; overflow: hidden; opacity: 0;
+  /* delay on CLOSE prevents jitter when card grows under the cursor */
+  transition: max-height .3s var(--ease) .18s, opacity .2s var(--ease) .18s; }
+.lvl-card:hover .lvl-expand { max-height: 300px; opacity: 1;
+  transition: max-height .3s var(--ease) 0s, opacity .2s var(--ease) 0s; }
+.lvl-expand-inner { padding-top: 10px; border-top: 1px solid var(--border); margin-top: 10px; }
+.lvl-expand-blurb { font-size: 12px; font-weight: 300; color: var(--text-2); line-height: 1.6; }
+.lvl-expand-sigs { margin-top: 7px; display: flex; flex-direction: column; gap: 3px; }
+.lvl-expand-sig { font-size: 11px; color: var(--text-3); padding-left: 11px; position: relative; line-height: 1.45; }
+.lvl-expand-sig::before { content: '·'; position: absolute; left: 0; }
+.lvl-expand-cta { font-size: 10px; font-weight: 600; letter-spacing: .10em; text-transform: uppercase; color: var(--accent); margin-top: 9px; display: block; }
+/* ── OVERVIEW EXTRAS ── */
+.result-shift { background: var(--accent-d); border: 1px solid rgba(252,177,22,.22); border-radius: var(--r); padding: 12px 16px; margin-bottom: 20px; display: flex; gap: 10px; align-items: baseline; }
+.shift-label { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; }
+.shift-text { font-size: 15px; font-weight: 400; color: var(--text); }
+.result-sigs-h { font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); margin-bottom: 9px; }
+.result-sig { font-size: 14px; font-weight: 300; color: var(--text-2); padding-left: 18px; position: relative; line-height: 1.5; margin-bottom: 5px; }
+.result-sig::before { content: '✓'; position: absolute; left: 0; font-size: 11px; color: #00a855; }
+/* ── REPO + NEWSLETTER ── */
+.repo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px,1fr)); gap: 8px; }
+.repo-card { padding: 12px; background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); text-decoration: none; display: flex; flex-direction: column; gap: 4px; transition: all .15s; }
+.repo-card:hover { border-color: var(--primary); background: var(--bg-3); }
+.repo-stars { font-size: 10px; font-weight: 600; letter-spacing: .06em; color: var(--accent); }
+.repo-name { font-size: 12px; font-weight: 500; color: var(--text); font-family: var(--ff-m); }
+.repo-desc { font-size: 11px; font-weight: 300; color: var(--text-3); line-height: 1.5; }
+.nl-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+.nl-pill { font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; background: var(--bg-2); border: 1px solid var(--border); color: var(--text-2); text-decoration: none; transition: all .15s; }
+.nl-pill:hover { border-color: var(--primary); color: var(--primary); }
+/* ── COLLAPSIBLE HARNESS ── */
+.harness-body { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
+.harness-body.open { max-height: 2000px; }
+.toggle-btn { font-family: var(--ff); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 5px; background: transparent; border: 1px solid var(--border); color: var(--text-3); cursor: pointer; transition: all .15s; }
+.toggle-btn:hover { color: var(--text); border-color: var(--border-2); }
+.toggle-btn.open { color: var(--primary); border-color: var(--primary); }
+.ide-box { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 20px; }
+.ide-box-head { display: flex; align-items: flex-start; justify-content: space-between; padding: 12px 15px; border-bottom: 1px solid var(--border); gap: 12px; }
+.ide-box-title { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+.ide-box-sub { font-size: 12px; font-weight: 300; color: var(--text-3); margin-top: 3px; }
+.ide-box-body { padding: 14px 15px; font-size: 12px; line-height: 1.75; color: var(--text-2); font-family: var(--ff-m); white-space: pre-wrap; background: var(--bg); }
+/* ── WIDER RESULT ── */
+.result-wrap { max-width: 960px; }
+@media (max-width: 860px) {
+  .intro-wrap { grid-template-columns: 1fr; padding: 56px 24px; }
+  .stair-wrap { display: none; }
+  .lvl-grid { grid-template-columns: repeat(2, 1fr); }
+  .result-grid { grid-template-columns: 1fr; }
+  .app-nav { padding: 13px 20px; }
+  .quiz-body, .result-wrap, .explore-wrap, .ldet-wrap { padding-left: 20px; padding-right: 20px; }
+  .rtab { padding: 6px 12px; font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<section class="view active" id="view-intro">
+  <nav class="app-nav">
+    <div class="nav-logo" onclick="showView(&#39;intro&#39;)">Agentic Levels</div>
+    <div class="nav-links">
+      <span class="nav-link" onclick="showView(&#39;explore&#39;)">All Levels</span>
+      <button class="nav-icon-btn" id="dark-btn" onclick="toggleDark()">Dark</button>
+    </div>
+  </nav>
+  <div class="intro-wrap">
+    <div>
+      <div class="intro-label"><a href="https://www.bassimeledath.com/blog/levels-of-agentic-engineering" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;">Bassim Eledath</a> · March 2026</div>
+      <h1 class="intro-title">The <em>8 Levels</em><br>of Agentic<br>Engineering</h1>
+      <p class="intro-desc">AI's coding ability is outpacing our ability to wield it. The gap doesn't close overnight — it closes in levels.</p>
+      <div class="intro-actions">
+        <button class="btn btn-primary" onclick="startQuiz()">Take the Assessment</button>
+        <button class="btn btn-secondary" onclick="showView(&#39;explore&#39;)">Explore All Levels</button>
+      </div>
+    </div>
+    <div class="stair-wrap">
+      <div class="stair-html" id="stair-html"><div class="stair-outer" id="so-1" style="left: 0px; bottom: 6px; width: 170px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#5e8fa3" onclick="showLevelDetail(1)">
+        <div class="stair-tag">AI fills in the blanks you leave.</div>
+        <div class="stair-pill"><span class="stair-sn">1.</span><span class="stair-sl">Tab Complete</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-2" style="left: 45px; bottom: 50px; width: 170px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#6ea1b5" onclick="showLevelDetail(2)">
+        <div class="stair-tag">Multi-file chat. Your whole codebase.</div>
+        <div class="stair-pill"><span class="stair-sn">2.</span><span class="stair-sl">Agent IDE</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-3" style="left: 90px; bottom: 94px; width: 175px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#7cb3c5" onclick="showLevelDetail(3)">
+        <div class="stair-tag">Every token fights for its place.</div>
+        <div class="stair-pill"><span class="stair-sn">3.</span><span class="stair-sl">Context Engineering</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-4" style="left: 135px; bottom: 138px; width: 185px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#6fa899" onclick="showLevelDetail(4)">
+        <div class="stair-tag">Every session gets better than the last.</div>
+        <div class="stair-pill"><span class="stair-sn">4.</span><span class="stair-sl">Compounding Eng.</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-5" style="left: 180px; bottom: 182px; width: 160px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#9485bf" onclick="showLevelDetail(5)">
+        <div class="stair-tag">The LLM can act on your systems.</div>
+        <div class="stair-pill"><span class="stair-sn">5.</span><span class="stair-sl">MCP &amp; Skills</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-6" style="left: 225px; bottom: 226px; width: 175px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#bf9470" onclick="showLevelDetail(6)">
+        <div class="stair-tag">Agent sees what it built and iterates.</div>
+        <div class="stair-pill"><span class="stair-sn">6.</span><span class="stair-sl">Harness Engineering</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-7" style="left: 270px; bottom: 270px; width: 165px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#c07555" onclick="showLevelDetail(7)">
+        <div class="stair-tag">Work happens while you sleep.</div>
+        <div class="stair-pill"><span class="stair-sn">7.</span><span class="stair-sl">Background Agents</span></div>
+      </div>
+    </div><div class="stair-outer" id="so-8" style="left: 315px; bottom: 314px; width: 175px; animation: auto ease 0s 1 normal none running none; opacity: 1;">
+      <div class="stair-inner" style="background:#b05e3f" onclick="showLevelDetail(8)">
+        <div class="stair-tag">Nobody's mastered this level yet.</div>
+        <div class="stair-pill"><span class="stair-sn">8.</span><span class="stair-sl">Autonomous Teams</span></div>
+      </div>
+    </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARED RESULT (opened via #l=N link) -->
+<section class="view" id="view-shared">
+  <nav class="app-nav">
+    <div class="nav-logo" onclick="showView('intro')">Agentic Levels</div>
+    <div class="nav-links">
+      <span class="nav-link" onclick="showView('explore')">All Levels</span>
+      <button class="nav-icon-btn" onclick="toggleDark()">Dark</button>
+    </div>
+  </nav>
+  <div class="shared-wrap">
+    <div class="shared-card" id="shared-card-body"></div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="view" id="view-quiz">
+  <nav class="app-nav">
+    <div class="nav-logo" onclick="showView(&#39;intro&#39;)">Agentic Levels</div>
+    <div class="nav-links">
+      <span class="nav-link" onclick="showView(&#39;explore&#39;)">All Levels</span>
+      <button class="nav-icon-btn" onclick="toggleDark()">Dark</button>
+    </div>
+  </nav>
+  <div class="quiz-body">
+    <div class="quiz-inner">
+      <div class="quiz-top">
+        <div class="quiz-label">What Level Are You?</div>
+        <div class="quiz-counter" id="qcounter">1 / 7</div>
+      </div>
+      <div class="quiz-track"><div class="quiz-fill" id="qfill" style="width:14.28%"></div></div>
+      <h2 class="quiz-q" id="qq"></h2>
+      <div class="quiz-opts" id="qopts"></div>
+      <div class="quiz-footer">
+        <button class="btn btn-secondary" id="qback" onclick="quizBack()">Back</button>
+        <button class="btn btn-primary" id="qnext" onclick="quizNext()" disabled="">Next</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULT -->
+<section class="view" id="view-result">
+  <nav class="app-nav">
+    <div class="nav-logo" onclick="showView(&#39;intro&#39;)">Agentic Levels</div>
+    <div class="nav-links">
+      <span class="nav-badge" id="badge-r" style="display: inline;">Level 8</span>
+      <span class="nav-link" onclick="showView(&#39;explore&#39;)">All Levels</span>
+      <span class="nav-link" onclick="startQuiz()">Retake</span>
+      <button class="nav-icon-btn" onclick="toggleDark()">Dark</button>
+    </div>
+  </nav>
+  <div id="result-body" style="flex:1"></div>
+</section>
+
+<!-- EXPLORE -->
+<section class="view" id="view-explore">
+  <nav class="app-nav">
+    <div class="nav-logo" onclick="showView(&#39;intro&#39;)">Agentic Levels</div>
+    <div class="nav-links">
+      <span class="nav-badge" id="badge-e" style="display: inline;">Level 8</span>
+      <span class="nav-link" id="result-link-e" onclick="showView(&#39;result&#39;)" style="display: inline;">Your Result</span>
+      <span class="nav-link" onclick="startQuiz()">Assessment</span>
+      <button class="nav-icon-btn" onclick="toggleDark()">Dark</button>
+    </div>
+  </nav>
+  <div id="explore-body" style="flex:1"></div>
+</section>
+
+<!-- LEVEL DETAIL -->
+<section class="view" id="view-level">
+  <nav class="app-nav">
+    <div class="nav-logo" onclick="showView(&#39;intro&#39;)">Agentic Levels</div>
+    <div class="nav-links">
+      <span class="nav-badge" id="badge-l" style="display: inline;">Level 8</span>
+      <span class="nav-link" onclick="showView(&#39;explore&#39;)">All Levels</span>
+      <span class="nav-link" id="lnav-result" onclick="showView(&#39;result&#39;)" style="display: inline;">Your Result</span>
+      <button class="nav-icon-btn" onclick="toggleDark()">Dark</button>
+    </div>
+  </nav>
+  <div id="level-body" style="flex:1"></div>
+</section>
+
+<script>
+// ═══════════════════════════════════════
+// LEVEL COLORS
+// ═══════════════════════════════════════
+const C = {
+  1:'#9e9aa8', 2:'#5d95ee', 3:'#2da3cc',
+  4:'#a6781c', 5:'#196EFA', 6:'#00a855',
+  7:'#e8a30c', 8:'#FD542F'
+};
+
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+const DATA = [
+{id:1, name:"Tab Complete", tagline:"AI fills in the blanks you leave.",
+ summary:"It started with Copilot and tab complete. You click tab, AI autocompletes code. It favored experienced devs who could skeleton their code before AI filled in the blanks. Most new entrants to agentic engineering skip this level entirely.",
+ here:["Using GitHub Copilot, Cursor, or Claude Code to accept inline completions as you type","Autocomplete speeds up boilerplate, repetitive patterns, and well-trodden API calls","You've learned to skeleton your code so AI has a pattern to complete from — not just a blank line","The productivity feels real but contained — it helps with the 'how', never with the 'what'"],
+ back:["The model only sees the file under the cursor — no awareness of the rest of your codebase","Every session starts from zero: no memory of your project, architecture, or past mistakes","Multi-file changes still require you to manually coordinate each edit in sequence","Common AI mistakes repeat because there's no place for lessons to accumulate","You're still doing all the architectural thinking — AI is a fast typist, not a thinking partner"],
+ next:"Install Cursor or Claude Code today. Open a real project, ask it to explain the codebase structure, then ask it to make a change that spans multiple files. That's the jump.",
+ week:["Install Cursor or Claude Code","Ask the agent to explain your entire project directory","Make one multi-file change entirely through chat — no manual typing"],
+ month:["Rewrite a complete feature through chat","Learn the @ context referencing syntax","Use plan mode on a real task end-to-end and ship it"],
+ res:[
+   {t:"Cursor Docs: Getting Started",u:"https://docs.cursor.com/get-started/migrate-from-vscode",ty:"docs",s:"docs.cursor.com"},
+   {t:"Claude Code Quickstart",u:"https://docs.anthropic.com/en/docs/claude-code/quickstart",ty:"docs",s:"docs.anthropic.com"},
+   {t:"GitHub Copilot Overview",u:"https://github.com/features/copilot",ty:"tool",s:"github.com"}
+ ]},
+{id:2, name:"Agent IDE", tagline:"Multi-file chat. Your codebase in context.",
+ summary:"AI-focused IDEs like Cursor changed the game by connecting chat to your codebase, making multi-file edits dramatically easier. But the ceiling was always context: the model could only help with what it could see, and annoyingly often it saw either not enough or too much of the wrong thing.",
+ here:["Using Cursor, Claude Code, or Windsurf as your primary IDE — chat is how you code","Making multi-file changes through chat without manually coordinating each file","Starting to use plan mode to structure larger tasks before delegating them","Context references (@file, /add) are part of your workflow — you're intentional about what the model sees"],
+ back:["Context is still reactive — you pull in the right files manually every session from scratch","The LLM makes the same mistakes repeatedly because there's nowhere for lessons to accumulate","Each session resets completely: no memory of conventions, past mistakes, or project decisions","Nothing compounds — a month of sessions doesn't make the next session meaningfully better"],
+ next:"Start writing a CLAUDE.md or .cursorrules file. Every time the LLM makes a mistake, document it there. Get intentional about what context you feed the model.",
+ week:["Create your first CLAUDE.md with your project's architecture overview","Add 5 explicit rules based on mistakes you've seen the LLM make","Use @-file references instead of letting the model guess what to look at"],
+ month:["Build a well-structured rules file with all project conventions","Document your tech stack, patterns, and explicit anti-patterns","Learn to use conversation history management to keep context clean"],
+ res:[
+   {t:"Writing Better CLAUDE.md Files",u:"https://docs.anthropic.com/en/docs/claude-code/memory",ty:"docs",s:"docs.anthropic.com"},
+   {t:"Cursor Rules for AI",u:"https://docs.cursor.com/context/rules-for-ai",ty:"docs",s:"docs.cursor.com"},
+   {t:"12-Factor Agents",u:"https://github.com/humanlayer/12-factor-agents",ty:"github",s:"github.com/humanlayer"}
+ ]},
+{id:3, name:"Context Engineering", tagline:"Every token fights for its place. Signal over noise.",
+ summary:"Context engineering became a thing when models got reliably good at following a reasonable number of instructions with just the right amount of context. Noisy context was just as bad as underspecified context, so the effort was in improving information density per token.",
+ here:["A curated CLAUDE.md with explicit project rules and conventions","Intentional about which files you include as context each session","When LLM fails, your first question is 'did I give it the right context?'","Managing conversation history to avoid models losing the plot mid-session"],
+ back:["Each session still teaches the LLM the same lessons","Mistakes repeat because there's no codified memory between sessions","You optimize context but don't build on what you learned"],
+ next:"Start the compounding loop. After every significant session, update your rules file with what you learned: what worked, what broke, what pattern to follow next time.",
+ week:["Add a post-session habit: update CLAUDE.md after every significant AI session","Document the last 3 mistakes the LLM made and add rules to prevent recurrence","Create a /docs folder with architecture decisions the agent can discover autonomously"],
+ month:["Build a structured docs/ folder the agent can navigate on its own","Establish PLAN → DELEGATE → ASSESS → CODIFY as your standard task loop","Reduce rules file to under 100 lines and move detail into referenced docs"],
+ res:[
+   {t:"Compounding Engineering (Every.to)",u:"https://every.to/source-code/my-ai-had-already-fixed-the-code-before-i-saw-it",ty:"article",s:"every.to"},
+   {t:"12-Factor Agents on GitHub",u:"https://github.com/humanlayer/12-factor-agents",ty:"github",s:"github.com/humanlayer"},
+   {t:"Anthropic Prompt Engineering Guide",u:"https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",ty:"docs",s:"docs.anthropic.com"}
+ ]},
+{id:4, name:"Compounding Engineering", tagline:"Every session gets better than the last.",
+ summary:"Compounding engineering improves every session after the current one. It's a plan, delegate, assess, codify loop. You plan the task, delegate it, assess the output, and crucially: codify what you learned. LLMs are stateless — if they re-introduce a dependency you removed yesterday, they'll do it again tomorrow unless you tell them not to.",
+ here:["CLAUDE.md is a living document you update after every session","Post-session codify habit is consistent and automatic","When LLM fails, your instinct is to update rules before blaming the model","docs/ folder is something the agent can navigate without you"],
+ back:["Context and rules are strong but LLM's capability ceiling is still about what it can do","Complex workflows require you to stay in the loop at every step","No feedback loop that lets the agent validate its own output"],
+ next:"Add MCPs and skills to your workflow. Wire your agent into your actual systems: database, CI, browser. Start with one MCP that removes a manual step you repeat daily.",
+ week:["Install 2-3 MCPs relevant to your stack (filesystem, browser, your database)","Write your first custom skill for a task you do every week","Describe your tools clearly in their definitions — the model reads these to decide which to call"],
+ month:["Build a PR review skill with at least one automated check","Wire your agent into CI so it can validate its own output","Create a shared skills registry if working with a team"],
+ res:[
+   {t:"MCP Documentation",u:"https://docs.anthropic.com/en/docs/agents-and-tools/mcp",ty:"docs",s:"docs.anthropic.com"},
+   {t:"FastMCP — Python MCP Framework",u:"https://github.com/jlowin/fastmcp",ty:"github",s:"github.com/jlowin"},
+   {t:"DeepWiki MCP (open-source repo docs)",u:"https://deepwiki.com",ty:"tool",s:"deepwiki.com"}
+ ]},
+{id:5, name:"MCP & Skills", tagline:"The LLM can act on your systems, not just think about them.",
+ summary:"Levels 3 and 4 solve for context. Level 5 solves for capability. MCPs and custom skills give your LLM access to your database, APIs, CI pipeline, design system, Playwright for browser testing. Instead of just thinking about your codebase, the model can now act on it.",
+ here:["Multiple MCPs wired into your coding agent","Custom skills built for your team's specific workflows","PR review skill with automated linting, pattern checking, and issue flagging","Agent has access to systems it can validate its own output against"],
+ back:["Agent can act on systems but has no automated feedback loop on correctness","You're still the primary feedback mechanism — errors surface to you first","No harness letting the agent test, iterate, and self-correct autonomously"],
+ next:"Build the harness. Wire your test suite, a CLI validation tool, or Chrome DevTools into the agent runtime so it can see what its code produces and iterate without you.",
+ week:["Add your test suite as something the agent runs automatically after each change","Set up pre-commit hooks the agent triggers on its own","Try building a CLI tool the agent can use to test its changes against the live system"],
+ month:["Build a full automated feedback loop: code change → tests → linter → result back to agent","Create an AGENTS.md (~100 lines) that serves as a table of contents pointing to structured docs","Make documentation freshness part of your CI pipeline"],
+ res:[
+   {t:"Harness Engineering (OpenAI)",u:"https://openai.com/index/harness-engineering/",ty:"article",s:"openai.com"},
+   {t:"Claude Code Hooks & Settings",u:"https://docs.anthropic.com/en/docs/claude-code/hooks",ty:"docs",s:"docs.anthropic.com"},
+   {t:"Security Boundaries in Agentic Architectures",u:"https://vercel.com/blog/security-boundaries-in-agentic-architectures",ty:"article",s:"vercel.com"}
+ ]},
+{id:6, name:"Harness Engineering", tagline:"The agent sees what it built and iterates on its own output.",
+ summary:"Harness engineering is about building the entire environment, tooling, and feedback loops that let agents do reliable work without you intervening. Give the agent the feedback loop, not just the editor. The agent runs tests, sees failures, fixes the code, re-runs tests — and only surfaces to you when it's stuck.",
+ here:["Automated feedback loop: agent runs tests after every change","Pre-commit hooks, linters, type systems the agent triggers without prompting","Agent can reproduce bugs and validate its own fixes","Security boundaries between agent, generated code, and secrets"],
+ back:["You're still present for every task — nothing runs while you're away","Work is sequential, bounded by your attention","Agent capacity scales with your time, not independently"],
+ next:"Set up your first background agent. Try the Ralph loop: an autonomous agent loop that keeps running until all tasks are done. Start with something low-risk and fully verifiable.",
+ week:["Try the Ralph loop on one low-risk task (doc update, test generation)","Set up git worktrees so agents can work in isolation without touching your main branch","Define a clear success criterion the agent can verify itself before marking done"],
+ month:["Run 3 background agents in parallel on a real project","Build or adopt an orchestrator that dispatches tasks and tracks status","Try different models for different jobs: Opus for implementation, Gemini for research, Sonnet for review"],
+ res:[
+   {t:"The Ralph Loop",u:"https://ghuntley.com/loop/",ty:"article",s:"ghuntley.com"},
+   {t:"Claude Code Sub-Agents",u:"https://code.claude.com/docs/en/sub-agents",ty:"docs",s:"code.claude.com"},
+   {t:"Ramp's Inspect: Cloud Background Agents",u:"https://builders.ramp.com/post/why-we-built-our-background-agent",ty:"article",s:"builders.ramp.com"}
+ ]},
+{id:7, name:"Background Agents", tagline:"Work happens while you sleep. You review PRs, not code.",
+ summary:"Once an agent can generate a solid plan and execute without you signing off, it can run asynchronously while you do something else. That's the critical shift from 'multiple tabs I'm juggling' to 'work that's happening without me.' You're not writing code anymore. You've become an orchestrator of agents.",
+ here:["Multiple background agents running in parallel on real tasks","An orchestrator handling dispatch and tracking","Different models for different jobs: implement, research, review — all separated","CI integrated with AI: docs bots, security reviewers, dependency updaters running autonomously"],
+ back:["Agents still route everything through a central orchestrator (hub-and-spoke)","Direct agent-to-agent coordination still requires your mediation","Coordination overhead grows as you scale up"],
+ next:"Level 8 is experimental and nobody has fully mastered it. For most teams, Level 7 is where the real output lives. Focus on tightening your orchestration and letting the system run longer without intervention.",
+ week:["Let a background agent run 4+ hours without checking in — see what breaks","Set up the implementer/reviewer model split on every significant PR","Add a CI-triggered docs bot that updates CLAUDE.md on every merge"],
+ month:["Build a full pipeline: dispatch → Opus implements → Sonnet reviews → merge on pass","Enable Claude Code Sub-Agents (experimental) on a non-critical project","Measure your output per week before vs. after — it should be 3–5x"],
+ res:[
+   {t:"Claude Code Sub-Agents",u:"https://code.claude.com/docs/en/sub-agents",ty:"docs",s:"code.claude.com"},
+   {t:"Dispatch: Multi-Model Orchestration",u:"https://github.com/bassimeledath/dispatch",ty:"github",s:"github.com/bassimeledath"},
+   {t:"Boris Cherny on Plan Mode",u:"https://youtu.be/PQU9o_5rHC4",ty:"video",s:"youtube.com"},
+   {t:"Agent Backpressure",u:"https://latentpatterns.com/glossary/agent-backpressure",ty:"article",s:"latentpatterns.com"}
+ ]},
+{id:8, name:"Autonomous Agent Teams", tagline:"Agents coordinate directly. Nobody's mastered this level yet.",
+ summary:"Level 8 removes the orchestrator bottleneck. Agents coordinate with each other directly — claiming tasks, sharing findings, flagging dependencies, resolving conflicts — without routing through a single hub. Anthropic used 16 parallel agents to build a C compiler from scratch. The seams are still visible everywhere.",
+ here:["Agents claim tasks from a shared store and coordinate directly — no central human in the loop","Agents communicate findings, dependencies, and handoffs to each other without your mediation","CI actively prevents regressions across parallel autonomous runs before any merge","Operating in verifiable domains where correctness is machine-checkable, not human-reviewed","Trust boundaries and blast radius are first-class design concerns — not afterthoughts"],
+ back:["Models aren't yet reliable enough for the ambiguity that truly hub-free coordination creates — they need more guardrails than the architecture provides","Token cost and inference speed make sustained agent mesh architectures uneconomical for most use cases outside moonshot projects","Without hierarchy, agents tend toward deadlock or churn on ambiguous decisions rather than committing","The tooling is experimental — Agent Teams exist but the failure modes are barely documented","State synchronization across parallel agents without a single source of truth is an unsolved production problem"],
+ next:"You're at the frontier. Stay close to Anthropic's Agent Teams research and the Latent Space podcast. The practitioners at this level are few and the learnings are barely written up. Contribute back.",
+ week:["Enable Claude Code Sub-Agents on a sandboxed project","Document what breaks and what works — this knowledge barely exists publicly","Add CI that actively prevents regressions across parallel agent runs"],
+ month:["Attempt a feature built by coordinating agents with no hub orchestrator","Isolate trust domains: agent, generated code, and secrets in separate boundaries","Write up what you learn and publish it"],
+ res:[
+   {t:"Claude Code Sub-Agents Docs",u:"https://code.claude.com/docs/en/sub-agents",ty:"docs",s:"code.claude.com"},
+   {t:"Latent Space Podcast",u:"https://www.latent.space",ty:"podcast",s:"latent.space"},
+   {t:"The 8 Levels Article (Full)",u:"https://www.bassimeledath.com/blog/levels-of-agentic-engineering",ty:"article",s:"bassimeledath.com"},
+   {t:"Cursor Multi-Agent Work",u:"https://cursor.sh/blog",ty:"article",s:"cursor.sh"}
+ ]}
+];
+
+// ═══════════════════════════════════════
+// EXTRA — blurb, signals, shift, repos, newsletters per level
+// ═══════════════════════════════════════
+const EXTRA = {
+1:{blurb:"You click tab and AI fills the gap. Context is limited to whatever's near the cursor — no codebase awareness, no memory across sessions.",
+  signals:["You feel the AI doesn't understand your project structure","Re-explaining the same context every session","Complex multi-file changes require manually coordinating edits"],
+  shift:"Completion tool → thinking partner",
+  repos:[
+    {name:"anthropics/claude-code",url:"https://github.com/anthropics/claude-code",stars:"28k★",desc:"The Claude Code CLI — your fastest move from autocomplete to full agent sessions"},
+    {name:"PatrickJS/awesome-cursorrules",url:"https://github.com/PatrickJS/awesome-cursorrules",stars:"8k★",desc:"Community .cursorrules for every stack — steal before writing your own"},
+    {name:"humanlayer/12-factor-agents",url:"https://github.com/humanlayer/12-factor-agents",stars:"3k★",desc:"12 principles for reliable agent software — worth reading at any level"},
+  ],
+  newsletters:[{name:"TLDR Newsletter",url:"https://tldr.tech"},{name:"The Pragmatic Engineer",url:"https://newsletter.pragmaticengineer.com"}]},
+2:{blurb:"AI-focused IDEs connect chat to your codebase for multi-file edits. The ceiling is context: the model only helps with what it can see right now.",
+  signals:["Rules file exists but rarely updated","Pulling in context manually before each session","Multi-file changes work but the same mistakes recur"],
+  shift:"Reactive context → intentional context",
+  repos:[
+    {name:"anthropics/anthropic-cookbook",url:"https://github.com/anthropics/anthropic-cookbook",stars:"12k★",desc:"Practical recipes for context management and prompting patterns with code"},
+    {name:"PatrickJS/awesome-cursorrules",url:"https://github.com/PatrickJS/awesome-cursorrules",stars:"8k★",desc:"Battle-tested cursor rules by language and framework"},
+    {name:"humanlayer/12-factor-agents",url:"https://github.com/humanlayer/12-factor-agents",stars:"3k★",desc:"Factor 2: own your context window — essential reading for this transition"},
+  ],
+  newsletters:[{name:"TLDR Newsletter",url:"https://tldr.tech"},{name:"The Pragmatic Engineer",url:"https://newsletter.pragmaticengineer.com"}]},
+3:{blurb:"Context engineering revealed that 80% of output quality is determined by what you give the model. Every token fights for its place — signal over noise is the whole game.",
+  signals:["When AI fails, first question is 'what context was missing?'","A docs/ folder the agent can discover on its own","CLAUDE.md grown through accumulated lessons over many sessions"],
+  shift:"Fixing sessions → building systems that fix sessions",
+  repos:[
+    {name:"anthropics/anthropic-cookbook",url:"https://github.com/anthropics/anthropic-cookbook",stars:"12k★",desc:"Context management patterns and prompt engineering with real code examples"},
+    {name:"humanlayer/12-factor-agents",url:"https://github.com/humanlayer/12-factor-agents",stars:"3k★",desc:"Factor 6: own your context window — this level in architectural form"},
+    {name:"pydantic/pydantic-ai",url:"https://github.com/pydantic/pydantic-ai",stars:"9k★",desc:"Structured outputs and validation that keep agent context clean"},
+  ],
+  newsletters:[{name:"Latent Space",url:"https://latent.space"},{name:"The Batch",url:"https://www.deeplearning.ai/the-batch"}]},
+4:{blurb:"Plan → delegate → assess → codify. Every session makes the next one better. LLMs are stateless — if you don't codify, they'll repeat the same mistake tomorrow.",
+  signals:["Post-session codify is a habit, not an afterthought","CLAUDE.md is the product of dozens of accumulated lessons","Reaching for MCP docs because you know you need more capability"],
+  shift:"Context optimization → capability expansion",
+  repos:[
+    {name:"modelcontextprotocol/servers",url:"https://github.com/modelcontextprotocol/servers",stars:"10k★",desc:"Reference MCP implementations — filesystem, git, database, browser"},
+    {name:"jlowin/fastmcp",url:"https://github.com/jlowin/fastmcp",stars:"9k★",desc:"Build your own MCP server in Python in under 30 lines"},
+    {name:"anthropics/claude-code",url:"https://github.com/anthropics/claude-code",stars:"28k★",desc:"Custom slash commands and skills — the capability layer you're about to unlock"},
+  ],
+  newsletters:[{name:"Latent Space",url:"https://latent.space"},{name:"Exponential View",url:"https://www.exponentialview.co"}]},
+5:{blurb:"MCPs and skills give your agent real access to your systems — database, CI, browser. It can now act on your codebase, not just think about it.",
+  signals:["Agent writes code and immediately runs tests to validate it","MCPs give the agent real access to your dev environment","Thinking about the feedback loop, not just the prompt"],
+  shift:"Capability without feedback → capability with validation",
+  repos:[
+    {name:"jlowin/fastmcp",url:"https://github.com/jlowin/fastmcp",stars:"9k★",desc:"Add validation tools your agent calls automatically after every change"},
+    {name:"BerriAI/litellm",url:"https://github.com/BerriAI/litellm",stars:"18k★",desc:"Route to any model with one API — essential for multi-model harness routing"},
+    {name:"microsoft/promptflow",url:"https://github.com/microsoft/promptflow",stars:"10k★",desc:"Batch evaluation and testing pipelines for LLM outputs"},
+  ],
+  newsletters:[{name:"Latent Space",url:"https://latent.space"},{name:"Interconnects",url:"https://www.interconnects.ai"}]},
+6:{blurb:"Harness engineering builds the entire environment — tests, linters, hooks — that lets agents do reliable work without you watching every step. Give the agent the feedback loop.",
+  signals:["Agent tasks run to completion without your supervision","You review PRs, not code — the diff is what you evaluate","Tests are part of agent output, not your manual review step"],
+  shift:"Synchronous work → asynchronous orchestration",
+  repos:[
+    {name:"microsoft/autogen",url:"https://github.com/microsoft/autogen",stars:"35k★",desc:"Multi-agent conversation framework with background execution patterns"},
+    {name:"anthropics/claude-code",url:"https://github.com/anthropics/claude-code",stars:"28k★",desc:"--headless flag + hooks = background agent execution ready today"},
+    {name:"BerriAI/litellm",url:"https://github.com/BerriAI/litellm",stars:"18k★",desc:"Model routing for orchestrators dispatching different agents to different models"},
+  ],
+  newsletters:[{name:"Latent Space",url:"https://latent.space"},{name:"Interconnects",url:"https://www.interconnects.ai"}]},
+7:{blurb:"Work happens while you sleep. You're not writing code anymore — you orchestrate parallel agents and review PRs they submitted while you were offline.",
+  signals:["Multiple background agents running on your codebase right now","Built or adopted an orchestrator for task dispatch and tracking","Different models for different jobs: implement, review, research — all separated"],
+  shift:"Orchestrating tasks → engineering coordination systems",
+  repos:[
+    {name:"microsoft/autogen",url:"https://github.com/microsoft/autogen",stars:"35k★",desc:"Most complete multi-agent coordination implementation in production use"},
+    {name:"crewAIInc/crewAI",url:"https://github.com/crewAIInc/crewAI",stars:"25k★",desc:"Role-based agent teams with task decomposition and handoff protocols"},
+    {name:"langchain-ai/langgraph",url:"https://github.com/langchain-ai/langgraph",stars:"12k★",desc:"Graph-based agent workflows with parallel execution and state management"},
+  ],
+  newsletters:[{name:"Latent Space",url:"https://latent.space"},{name:"Interconnects",url:"https://www.interconnects.ai"},{name:"Last Week in AI",url:"https://lastweekin.ai"}]},
+8:{blurb:"Level 8 removes the orchestrator bottleneck. Agents coordinate directly — claiming tasks, sharing findings — without routing through a central hub. Nobody's fully mastered this yet.",
+  signals:["Agents claim tasks and coordinate without your involvement","Designing trust boundaries and blast radius, not writing prompts","Your work is protocol design, not task delegation"],
+  shift:"Coordinator → protocol designer",
+  repos:[
+    {name:"microsoft/autogen",url:"https://github.com/microsoft/autogen",stars:"35k★",desc:"Research-grade multi-agent coordination — closest to Level 8 in production"},
+    {name:"crewAIInc/crewAI",url:"https://github.com/crewAIInc/crewAI",stars:"25k★",desc:"Hub-free coordination with claim protocols and direct agent handoffs"},
+    {name:"humanlayer/12-factor-agents",url:"https://github.com/humanlayer/12-factor-agents",stars:"3k★",desc:"Factor 12: stateless composable agents — key for mesh architectures"},
+  ],
+  newsletters:[{name:"Latent Space",url:"https://latent.space"},{name:"Interconnects",url:"https://www.interconnects.ai"},{name:"Ahead of AI",url:"https://magazine.sebastianraschka.com"}]},
+};
+
+// ═══════════════════════════════════════
+// GAPS — categorized per level
+// ═══════════════════════════════════════
+const GAPS = {
+1:[
+  {cat:'Context',    status:'gap',     items:['Model only sees the current file — no codebase awareness','No documented architecture or conventions for AI to read']},
+  {cat:'Memory',     status:'gap',     items:['No CLAUDE.md or rules file — every mistake repeats every session']},
+  {cat:'Tools',      status:'gap',     items:['No MCPs, no custom skills — AI is a typing assistant only']},
+  {cat:'Autonomy',   status:'gap',     items:['All work stops when you stop — zero independent execution']},
+],
+2:[
+  {cat:'Context',    status:'partial', items:['Context pulled in manually each session — nothing is automatic','No documented architecture the agent can discover on its own']},
+  {cat:'Memory',     status:'gap',     items:['No CLAUDE.md, or it\'s sparse — LLM repeats the same mistakes','Each session resets: no codified learning carries over']},
+  {cat:'Tools',      status:'gap',     items:['No MCPs or custom skills for your specific workflows']},
+  {cat:'Autonomy',   status:'gap',     items:['Still 1:1 chat — no background execution possible']},
+],
+3:[
+  {cat:'Context',    status:'partial', items:['Context optimized but compounding loop not yet in place','Mistakes may repeat — no systematic codify step after sessions']},
+  {cat:'Memory',     status:'partial', items:['Rules file exists but doesn\'t evolve after every session']},
+  {cat:'Tools',      status:'gap',     items:['Context-only — no MCP capability layer, no custom skills']},
+  {cat:'Autonomy',   status:'gap',     items:['You orchestrate every task manually, no delegation possible']},
+],
+4:[
+  {cat:'Context',    status:'strong',  items:['Strong curated context with regular post-session updates']},
+  {cat:'Memory',     status:'strong',  items:['Post-session codify habit is consistent — rules compound']},
+  {cat:'Tools',      status:'gap',     items:['No MCPs — agent can\'t act on systems, only think about them','Agent can\'t validate its own output without manual intervention']},
+  {cat:'Autonomy',   status:'partial', items:['Complex workflows still require you at every decision point']},
+],
+5:[
+  {cat:'Context',    status:'strong',  items:['Mature context layer with navigable docs structure']},
+  {cat:'Memory',     status:'strong',  items:['Living rules file with consistent codify loop']},
+  {cat:'Tools',      status:'strong',  items:['Multiple MCPs and custom skills wired in']},
+  {cat:'Autonomy',   status:'partial', items:['You\'re still the first to see errors — they don\'t route back to agent automatically','No automated validation feedback loop closing the loop on agent output']},
+],
+6:[
+  {cat:'Context',    status:'strong',  items:['Comprehensive docs and rules optimized for single-agent use']},
+  {cat:'Memory',     status:'partial', items:['CLAUDE.md not auto-updated by CI — drifts from codebase state over time']},
+  {cat:'Tools',      status:'strong',  items:['Harness with full automated feedback loop established']},
+  {cat:'Autonomy',   status:'gap',     items:['Work still stops when you stop — no background execution','Agent capacity still scales with your time, not independently']},
+],
+7:[
+  {cat:'Context',    status:'partial', items:['Docs optimized for single-agent — not structured for multi-agent coordination','No inter-agent knowledge sharing between parallel sessions']},
+  {cat:'Memory',     status:'partial', items:['CI-triggered rule updates not in place — CLAUDE.md drifts']},
+  {cat:'Tools',      status:'strong',  items:['Full harness with orchestration and background agents running']},
+  {cat:'Autonomy',   status:'strong',  items:['Multiple background agents running in parallel on real tasks']},
+  {cat:'Scale',      status:'gap',     items:['Hub-and-spoke bottleneck — everything still routes through you as central orchestrator','Direct agent-to-agent coordination not yet established']},
+],
+8:[
+  {cat:'Context',    status:'partial', items:['Multi-agent context routing still partly manual']},
+  {cat:'Memory',     status:'partial', items:['No robust shared knowledge base between agents — each session is isolated']},
+  {cat:'Tools',      status:'strong',  items:['Full autonomous toolchain with trust boundaries in place']},
+  {cat:'Autonomy',   status:'strong',  items:['Agents coordinate without constant human mediation']},
+  {cat:'Scale',      status:'partial', items:['Token cost and speed limits constrain large-scale deployment','Models not fully ready for full autonomy without human checkpoints at scale']},
+],
+};
+
+// ═══════════════════════════════════════
+// PROMPTS — 3 copy-paste prompts per level
+// ═══════════════════════════════════════
+const PROMPTS = {
+1:[
+  {name:'Bootstrap CLAUDE.md', desc:'Generate your first rules file',
+   body:`You are a senior agentic engineer setting up a new project.
+
+Read my codebase structure and write an initial CLAUDE.md that documents:
+1. Architecture overview (what this project is, main modules)
+2. Key conventions and patterns already in use
+3. 5 explicit rules to prevent common AI mistakes in this codebase
+4. What context to include vs. exclude each session
+
+Start by running: ls -la && cat package.json 2>/dev/null || cat pyproject.toml 2>/dev/null
+
+Be specific. Reference actual file paths and patterns from my codebase.`},
+  {name:'Multi-File Task Planner', desc:'Plan before coding — span files correctly',
+   body:`I want to implement the following feature:
+[DESCRIBE FEATURE HERE]
+
+Before writing any code:
+1. List every file that needs to change with the exact path
+2. Describe the specific change in each file (2-3 sentences)
+3. Flag any dependencies, risks, or things to verify first
+4. Give me the order to make the changes
+
+Then ask for my approval before executing. No code until I confirm the plan.`},
+  {name:'Codebase Orientation', desc:'Get AI to understand your project deeply',
+   body:`Analyze my codebase as a new AI assistant seeing it for the first time.
+
+Document:
+1. What this project does and its primary user-facing value
+2. The main modules/packages and their responsibilities
+3. Patterns, conventions, and architecture decisions in use
+4. What I should always include as context when working on this project
+5. The 3 most common mistakes an AI would make without the right context
+
+Be concrete — reference actual file names and code patterns.`},
+],
+2:[
+  {name:'Rules Audit', desc:'Tighten your CLAUDE.md for max signal',
+   body:`Review my CLAUDE.md below and give me a critical audit:
+
+[PASTE YOUR CLAUDE.MD HERE]
+
+Identify:
+1. Rules that are too vague to be actionable (rewrite them)
+2. Missing rules based on common AI mistakes in this type of project
+3. Rules that should live in a separate docs/ file instead
+4. Anything redundant or contradictory
+
+Output a revised CLAUDE.md under 80 lines. Every rule must prevent a specific mistake.`},
+  {name:'Mistake → Rule', desc:'Turn any LLM mistake into a permanent rule',
+   body:`Here's a mistake my AI assistant just made:
+[DESCRIBE THE MISTAKE]
+
+Write:
+1. A CLAUDE.md rule that prevents this exact mistake (1-2 lines, imperative)
+2. A verification step I can run to confirm the agent follows the rule
+3. Whether I need a new docs/ file to give the agent better context here
+
+Keep the rule atomic — one behavior, one rule.`},
+  {name:'Context Strategy', desc:'Optimize context for your most common tasks',
+   body:`I have a recurring task I do with AI assistance:
+[DESCRIBE YOUR MOST COMMON AI TASK]
+
+Design the optimal context strategy for this task:
+1. Which files/docs to always include (and why)
+2. Which files to explicitly exclude (and why — they add noise)
+3. The ideal framing/prompt structure for this task type
+4. What CLAUDE.md instruction makes the agent most effective here
+
+I want to run this task faster and get better output with less back-and-forth.`},
+],
+3:[
+  {name:'Session Debrief', desc:'Extract rules after every significant session',
+   body:`Here's what happened in my last AI coding session:
+[DESCRIBE: what task, what the AI got wrong, what worked well]
+
+Extract:
+1. 3 rules to add to my CLAUDE.md (formatted as ready-to-paste additions)
+2. Any docs/ file I should create to prevent this problem type recurring
+3. One pattern the AI got right that I should document to reinforce
+4. Whether any existing rule needs to be updated or sharpened
+
+Output the additions in CLAUDE.md format, ready to paste.`},
+  {name:'Docs Architecture', desc:'Design a /docs folder agents can self-navigate',
+   body:`Design a docs/ folder structure my AI agent can navigate autonomously.
+
+My project: [DESCRIBE PROJECT TYPE AND SIZE]
+Current context pain: [DESCRIBE WHERE AI LOSES THE THREAD]
+
+Design:
+1. What each docs/ file contains (specific content, not generic categories)
+2. How files cross-reference each other
+3. A CLAUDE.md "routing" section pointing the agent to the right doc per task type
+4. Which docs should the agent always load vs. load on demand
+
+Goal: agent should be able to orient itself by reading docs/ without me explaining the project each session.`},
+  {name:'Context Density Audit', desc:'Remove noise, increase signal per token',
+   body:`Audit my CLAUDE.md for signal-to-noise ratio:
+
+[PASTE YOUR CLAUDE.MD]
+
+For each rule:
+1. Mark as HIGH SIGNAL (prevents specific mistake), LOW SIGNAL (vague/generic), or NOISE (add friction without value)
+2. Rewrite LOW SIGNAL rules to be high signal, or cut them
+3. Identify which LOW SIGNAL items belong in docs/ files instead
+
+Output: a revised CLAUDE.md that says more with fewer tokens. Target: under 80 lines, every line earns its place.`},
+],
+4:[
+  {name:'MCP Design Brief', desc:'Design an MCP server for any system',
+   body:`I want to build an MCP server to automate this manual step I do weekly:
+[DESCRIBE THE SYSTEM AND WHAT YOU DO MANUALLY]
+
+Design:
+1. The 5 most valuable tools to expose (name, description, input/output schema)
+2. Authentication strategy (env var, OAuth, API key — which and why)
+3. Error handling: what errors the agent should catch and how to present them
+4. A FastMCP Python skeleton with tool stubs ready to implement
+
+Use FastMCP: pip install fastmcp. Output runnable starter code.`},
+  {name:'Custom Skill Builder', desc:'Turn any workflow into a reusable Claude skill',
+   body:`Create a Claude Code skill (.md file) for this workflow I do weekly:
+[DESCRIBE THE WORKFLOW IN DETAIL]
+
+The skill file should define:
+1. When to invoke this skill (trigger conditions)
+2. What context/tools/files are required before starting
+3. Step-by-step execution with decision points
+4. Output format and verification steps (how the agent confirms it worked)
+5. Common failure modes and how to handle them
+
+Format: ready-to-save as ~/.claude/skills/[skill-name]/SKILL.md`},
+  {name:'PR Review Skill', desc:'Automated PR review for your conventions',
+   body:`Write a PR review skill for my codebase.
+
+Stack: [LANGUAGE / FRAMEWORK]
+Key conventions: [LIST 3-5 MOST IMPORTANT RULES FROM YOUR CLAUDE.MD]
+Current review pain: [DESCRIBE WHAT SLIPS THROUGH MANUAL REVIEW]
+
+The skill should auto-check:
+1. CLAUDE.md convention violations (with specific pattern examples)
+2. Test coverage gaps (what should have tests but doesn't)
+3. Security concerns for my stack
+4. Performance anti-patterns specific to [FRAMEWORK]
+
+Output: a complete skill .md file I can add to my harness today.`},
+],
+5:[
+  {name:'Harness Architecture', desc:'Design a full automated validation chain',
+   body:`Design a full automated feedback loop for my coding agent.
+
+Current setup:
+- Tests: [describe your test setup — framework, coverage %, what's tested]
+- CI: [describe your CI pipeline]
+- MCPs/Tools: [list your active MCPs and custom skills]
+
+Design:
+1. The validation chain the agent runs after every code change (exact commands, order)
+2. Output format the agent reads to determine pass/fail (structured JSON or exit codes)
+3. How failures are routed back to the agent with enough context to fix them
+4. The git gate criteria before a commit is allowed
+
+Be specific. I want to implement this today.`},
+  {name:'Validation Chain Spec', desc:'Close the feedback loop on agent output',
+   body:`My agent is writing [TYPE OF CODE: API endpoints / UI components / scripts].
+
+Design a validation chain it runs after every change:
+1. Linter command with the specific rules that matter for my codebase
+2. Type check command (if applicable)
+3. Fast test subset to run first (unit only, no integration — for speed)
+4. Full test run gate before commit
+5. How each failure is formatted so the agent can parse it and attempt a fix
+
+Include example output formats for both pass and fail cases. The agent needs to read these programmatically.`},
+  {name:'Security Boundary Audit', desc:'Map trust domains in your agentic setup',
+   body:`Audit my agentic setup for security gaps.
+
+What I have:
+- MCPs: [list each MCP and what system it accesses]
+- Agent permissions: [what can the agent read/write/execute]
+- Secrets: [how credentials are stored and passed]
+- CI integration: [what the agent can trigger in CI]
+
+Map:
+1. What each agent/tool can read, write, and execute
+2. Where credentials flow and whether they're appropriately scoped
+3. What an agent with compromised instructions could do (blast radius)
+4. The 3 highest-priority boundary violations to fix first
+
+Output prioritized remediation steps.`},
+],
+6:[
+  {name:'Background Agent Spec', desc:'Design a task that runs while you sleep',
+   body:`Design a background agent for this task:
+[DESCRIBE THE TASK IN DETAIL]
+
+Spec includes:
+1. Success criteria the agent can verify itself (specific, checkable by machine)
+2. Git worktree setup so it doesn't touch my main branch
+3. Required MCPs and tools with their specific configurations
+4. Failure modes and rollback strategy
+5. How the agent signals completion and what it leaves for me to review
+
+Make it runnable with: claude --headless -p "[prompt]"
+Output a ready-to-run shell script.`},
+  {name:'Multi-Model Pipeline', desc:'Route tasks to the right model for cost + quality',
+   body:`I want to split my development pipeline across models for cost and quality optimization.
+
+My main AI tasks:
+[LIST YOUR 5-7 MOST COMMON AI TASKS]
+
+Design a model routing strategy:
+1. Which tasks go to Opus / Sonnet / Haiku / Gemini Flash and why
+2. Cost vs. quality tradeoff for each assignment
+3. Where model choice has the highest leverage (implement vs. review vs. research)
+4. A routing table I can add to my orchestration config
+
+Format as a decision table I can reference when setting up new background agent runs.`},
+  {name:'Orchestrator Bootstrap', desc:'Get basic agent orchestration running today',
+   body:`I want to set up basic agent orchestration for my project. Keep it simple — I want this running today.
+
+My project: [DESCRIBE PROJECT TYPE]
+Current flow: [DESCRIBE HOW YOU CURRENTLY RUN AI TASKS]
+
+Design:
+1. A task dispatch format (minimal JSON schema — what each task record needs)
+2. How agents claim tasks and report completion (file-based or lightweight API)
+3. A simple queue/status tracker I can run locally
+4. The branch naming and commit format for agent work
+5. One shell script that launches a new agent run from the queue
+
+Optimize for simplicity over features. I want the MVP working in under an hour.`},
+],
+7:[
+  {name:'Agent Team Charter', desc:'Define roles and handoffs for a parallel team',
+   body:`Design an agent team to build this feature:
+[DESCRIBE THE FEATURE]
+
+Define:
+1. Agent roles needed (e.g., architect, implementer, reviewer, tester)
+2. What each agent receives as input and produces as output
+3. Handoff protocol: what one agent writes that the next one reads
+4. Merge criteria: when is the work done enough to merge?
+5. Failure escalation: when does an agent stop and hand off to a human?
+
+Output as a structured charter I can give to each agent as its system prompt context.`},
+  {name:'Orchestration Audit', desc:'Find where you\'re still the bottleneck',
+   body:`Audit my current orchestration setup for bottlenecks:
+
+Setup: [DESCRIBE YOUR ORCHESTRATION — tools, dispatch method, how agents are launched]
+Typical run: [DESCRIBE A TYPICAL MULTI-AGENT SESSION]
+Current pain: [DESCRIBE WHERE THINGS SLOW DOWN OR REQUIRE YOUR INTERVENTION]
+
+Identify:
+1. Single points of failure in my current setup
+2. Tasks agents currently hand to me that they could handle autonomously
+3. Gaps in my CLAUDE.md/AGENTS.md causing agent confusion or re-asking
+4. The 3 highest-leverage fixes ordered by impact
+
+Output prioritized recommendations with specific implementation steps.`},
+  {name:'Self-Healing Pipeline', desc:'Make CI diagnose and fix its own failures',
+   body:`Design a self-healing CI pipeline for my project.
+
+When a build or test fails:
+1. An agent diagnoses the root cause (what triggers it, what it reads)
+2. It applies a fix following my CLAUDE.md conventions
+3. It re-runs the validation chain to confirm
+4. It either merges (if green) or escalates with structured context (if stuck)
+
+My CI setup: [DESCRIBE YOUR CI — GitHub Actions, etc.]
+My test framework: [DESCRIBE]
+
+Include: the webhook/trigger configuration, the agent prompt template, and the escalation format. Output as implementation-ready configuration.`},
+],
+8:[
+  {name:'Hub-Free Architecture', desc:'Remove the central orchestrator bottleneck',
+   body:`I have a hub-and-spoke orchestration that I am the hub of:
+[DESCRIBE YOUR CURRENT SETUP]
+
+Redesign for direct agent-to-agent coordination without a central human broker:
+1. How agents discover available tasks (shared queue, claim protocol)
+2. How they lock work to prevent conflicts (file locks, DB records, etc.)
+3. How they share findings without a central aggregator
+4. Conflict resolution when two agents modify the same file
+5. Escalation protocol when an agent is genuinely stuck
+
+Output as a coordination protocol spec I can share with each agent as context.`},
+  {name:'Trust Domain Design', desc:'Define what autonomous agents can and cannot do',
+   body:`Design the trust boundaries for a fully autonomous agent team working on:
+[DESCRIBE PROJECT/TASK]
+
+Define:
+1. What each agent role can read (filesystem, APIs, git)
+2. What each agent can write and under what conditions
+3. What requires human approval before execution
+4. How secrets are scoped per agent (principle of least privilege)
+5. How you verify post-run that no agent exceeded its trust boundary
+
+Output as a trust matrix I can use to configure agent permissions and write my AGENTS.md security section.`},
+  {name:'Coordination Protocol', desc:'Write the spec that keeps parallel agents synchronized',
+   body:`Write a formal coordination protocol for N agents working in parallel on:
+[DESCRIBE CODEBASE OR TASK]
+
+Include:
+1. Task claiming format (what a claim record looks like, how it's stored)
+2. Progress signaling (how agents broadcast state without a central broker)
+3. Handoff structure (what one agent leaves for the next)
+4. Merge queue protocol (order, conflict resolution, rollback triggers)
+5. Minimal shared state format that keeps agents synchronized
+
+Optimize for: simplicity of state, resilience to agent failure, and deterministic outcomes. Output as a protocol document agents can reference.`},
+],
+};
+
+// ═══════════════════════════════════════
+// PROMPTS4 — 4th prompt per level (next-level unlock focus)
+// ═══════════════════════════════════════
+const PROMPTS4 = {
+1:{name:'First Agent Session',desc:'Run your first real agent IDE session today',
+body:`I want to run my first real agent IDE session on a real project.
+
+My project: [DESCRIBE — language, size, what it does]
+I'm using: [Cursor / Claude Code / Windsurf]
+
+Help me:
+1. What are the first 3 questions I should ask to orient the agent to my codebase?
+2. What's the first real change I should make through chat (not manually) to prove the workflow?
+3. What's one thing to set up before my session that will make it 10x better?
+4. What am I likely to do wrong in my first session that I can preempt now?
+
+Goal: feel the difference between tab-complete and agent IDE in one session.`},
+2:{name:'Session Kickoff Template',desc:'Design an optimal ritual for every coding session',
+body:`Design an optimal kickoff routine for my recurring AI coding sessions.
+
+My project: [DESCRIBE]
+My most common delegated task: [DESCRIBE]
+
+Design:
+1. A 3-step pre-session ritual (what to pull in, what to review, what intent to set)
+2. An opening prompt template that orients the agent in under 60 seconds
+3. A session-close ritual to capture learnings before closing the tab
+
+Output as a repeatable routine I follow every time. Under 10 minutes total.`},
+3:{name:'CLAUDE.md as Navigation System',desc:'Turn your rules file into a routing table',
+body:`Redesign my CLAUDE.md as a navigation system, not an instruction list.
+
+Current CLAUDE.md:
+[PASTE YOUR CURRENT CLAUDE.MD]
+
+Goals:
+1. Agent routes itself to the right docs/context for any task without me explaining
+2. Rules are minimal — point to docs/, don't repeat what's in them
+3. Every rule has a clear trigger condition (when it applies)
+
+Output:
+- Restructured CLAUDE.md under 80 lines
+- List of docs/ files to create with what each one contains
+- A routing table at the top: "For task X → read Y"`},
+4:{name:'Skill Design Brief',desc:'Spec a reusable skill before building it',
+body:`Design a custom Claude Code skill for this workflow I repeat weekly:
+[DESCRIBE THE WORKFLOW IN DETAIL]
+
+Before any implementation:
+1. What inputs does this skill need from me each time it runs?
+2. What does done look like? (specific, observable output)
+3. What context, MCPs, or files does the skill need pre-loaded?
+4. What are the 3 most likely failure modes and how to handle each?
+5. What single verification step proves the skill worked correctly?
+
+Output: a skill design spec ready to turn into SKILL.md.`},
+5:{name:'TDD Agent Loop',desc:'Enforce test-first development in your agent workflow',
+body:`Design a TDD-first workflow for my coding agent.
+
+My test setup: [DESCRIBE — framework, coverage %, what's tested]
+My stack: [LANGUAGE / FRAMEWORK]
+
+Design the loop:
+1. When I describe a new feature, what test does the agent write FIRST (before any implementation)?
+2. Exact validation chain after each implementation attempt (commands + order)
+3. How does the agent know it's done? (specific, machine-checkable pass criteria)
+4. What does it do on test fail vs. lint fail vs. type fail?
+
+Output: a CLAUDE.md instruction block I can add today that enforces TDD for all new features.`},
+6:{name:'Background Agent Job Spec',desc:'Write a complete spec to dispatch an async task',
+body:`Write a complete job spec to dispatch this task to a background agent:
+[DESCRIBE THE TASK]
+
+Include:
+1. Full agent prompt (what to do, success criteria, git branch name to work on)
+2. Required MCPs and skills with specific configurations
+3. Hard constraints: what the agent must NOT do without checking back with me
+4. Verification: how I validate the output when it finishes
+5. Shell command: the exact launch invocation
+
+Output: copy-paste ready to run today.`},
+7:{name:'Agent Output Audit',desc:'Retrospective on a parallel agent workstream',
+body:`My agent team just completed a parallel workstream. Here's what was produced:
+[PASTE: what each agent did, PRs opened, files changed]
+
+Audit:
+1. What work overlapped or conflicted between agents?
+2. Which handoffs were unclear and caused the most rework?
+3. Which agent's output needed the most human intervention — and why?
+4. What coordination protocol change would have prevented the top 2 friction points?
+
+Output: specific updates to my AGENTS.md coordination section to prevent recurrence.`},
+8:{name:'Swarm Failure Mode Analysis',desc:'Stress-test your agent mesh for failure scenarios',
+body:`I'm running a decentralized agent mesh:
+[DESCRIBE: how agents discover tasks, claim work, share state]
+
+Run a failure mode analysis:
+1. Two agents claim the same task simultaneously — trace the failure
+2. One agent fails mid-task — how does the mesh detect and recover?
+3. An agent produces incorrect output that gets merged before review — blast radius?
+4. A compromised agent has full trust — worst case scenario?
+
+For each: describe the failure, estimate impact, propose the minimal fix.
+
+Output: a risk matrix to prioritize protocol hardening.`},
+};
+
+// ═══════════════════════════════════════
+// PLAN_DETAIL — expanded explanation + link per week/month item
+// ═══════════════════════════════════════
+const PLAN_DETAIL = {
+1:{week:[
+  {d:"Run `npm install -g @anthropic-ai/claude-code` or download Cursor. Open a real project — don't practice on a toy repo. The jump from tab-complete to agent IDE is only visible on real codebases.",u:"https://docs.anthropic.com/en/docs/claude-code/quickstart"},
+  {d:"Type: 'Walk me through the architecture of this project. What does each top-level directory do?' See what it understands before you've given any context.",u:null},
+  {d:"Pick a real change that touches at least 2 files. Describe it in chat. Don't touch the keyboard until the agent finishes — even if it struggles. That struggle is the lesson.",u:null},
+],month:[
+  {d:"Choose something non-trivial: a new API endpoint, a refactored component, a data model change. One sentence goal, agent drives all the way to passing tests.",u:null},
+  {d:"Use @ to reference specific files rather than hoping the model finds them. In Claude Code, use /add to pin files. This alone cuts hallucinations by 30–40%.",u:"https://docs.cursor.com/context/rules-for-ai"},
+  {d:"Plan mode generates a full breakdown before executing. Use it on something with 5+ steps. If it goes wrong, the plan makes it easy to diagnose exactly where.",u:"https://docs.anthropic.com/en/docs/claude-code/overview"},
+]},
+2:{week:[
+  {d:"Start with: project purpose, main modules, key technologies, and 3 rules about what AI should never do. 30 targeted lines beats 0.",u:"https://docs.anthropic.com/en/docs/claude-code/memory"},
+  {d:"After your next session: 'What did the LLM get wrong?' Write a rule per mistake. 'Never use var in this codebase.' 'Always run the linter before marking done.' Be imperative and specific.",u:null},
+  {d:"Instead of letting the agent guess what to read, explicitly tell it: '@src/api/auth.ts @docs/schema.md — now implement X.' This is the fastest single improvement at Level 2.",u:null},
+],month:[
+  {d:"Cover: tech stack, architectural patterns, naming conventions, anti-patterns, and what to always/never do. Any rule violated twice goes in.",u:null},
+  {d:"Anti-patterns are more valuable than patterns. 'Never install lodash — use native array methods.' 'Always use AuthService, never re-implement auth inline.' Specificity is everything.",u:null},
+  {d:"When context grows long and the model starts losing the plot, start a new conversation. /clear in Claude Code resets context while keeping your CLAUDE.md rules active.",u:"https://docs.anthropic.com/en/docs/claude-code/cli-reference"},
+]},
+3:{week:[
+  {d:"Immediately after a session: what did the AI do right? What did it do wrong? One rule per mistake. This single habit permanently separates Level 3 from Level 2.",u:null},
+  {d:"Look back at last week. Find the 3 most common mistakes. Write preventive rules with examples: 'API always returns camelCase — never map snake_case from the backend.' Name the specific file or pattern.",u:null},
+  {d:"Create docs/architecture.md and docs/conventions.md. In CLAUDE.md: 'For architecture decisions, read docs/architecture.md.' The agent should find context — not be told it every session.",u:null},
+],month:[
+  {d:"Structure: /docs/architecture.md (what the system is), /docs/conventions.md (how we write code), /docs/decisions.md (why we made key choices). Each file under 150 lines.",u:null},
+  {d:"For every task: write a plan, delegate it, review the result critically, update CLAUDE.md with what you learned. Never skip the last step — it's what makes the loop compound.",u:null},
+  {d:"If your CLAUDE.md exceeds 100 lines it's becoming noise. Move patterns into docs/ files. CLAUDE.md should be a routing table — 'for X, read Y' — not a dictionary.",u:null},
+]},
+4:{week:[
+  {d:"Start with the MCP reference servers — filesystem and git give you immediate value. `npm install -g @modelcontextprotocol/server-filesystem`. Test: ask the agent to find all TODO comments across your entire project.",u:"https://github.com/modelcontextprotocol/servers"},
+  {d:"A skill is a markdown file in ~/.claude/skills/ that defines a workflow. Start with a PR review skill that checks your top 3 convention violations. One grep check minimum.",u:"https://docs.anthropic.com/en/docs/claude-code/overview"},
+  {d:"Tool descriptions are the model's instruction manual. 'Run tests' is bad. 'Run the test suite and return: exit code, number passed/failed, and the first failing test name + error message' is good.",u:null},
+],month:[
+  {d:"A PR review skill should check: naming conventions from CLAUDE.md, missing tests for new functions, banned patterns, and security anti-patterns for your stack.",u:null},
+  {d:"Wire your test runner as an MCP tool so the agent calls it after every significant change. It should never ask 'should I run the tests?' — it just runs them.",u:null},
+  {d:"On a team: a shared skills/ directory in the repo means every developer gets the same agent capabilities. Document it in onboarding.",u:null},
+]},
+5:{week:[
+  {d:"Add a test-runner MCP tool or shell command the agent calls after every code change. Output must be parseable: exit code, failing test names, error messages — not prose.",u:null},
+  {d:"Claude Code hooks (PreToolUse, PostToolUse) trigger validation automatically. A PostToolUse hook that runs lint after every file edit means the agent sees lint errors before you do.",u:"https://docs.anthropic.com/en/docs/claude-code/hooks"},
+  {d:"Build a simple `validate.sh`: lint + type check + tests, exits non-zero on failure. One command, one exit code. The agent runs it and reads the output.",u:null},
+],month:[
+  {d:"Full chain: agent edits → linter (fast, immediate) → type check → affected tests → if all pass, commit. If any fail, agent reads output and retries — max 3 attempts before surfacing to you.",u:null},
+  {d:"AGENTS.md is your multi-agent constitution: what each agent can do, what context it loads, what the handoff format is. 100 lines max. Every agent reads this before starting.",u:null},
+  {d:"Add a CI check: does CLAUDE.md reference files that exist? Stale references to deleted docs cause silent agent confusion that's hard to diagnose.",u:null},
+]},
+6:{week:[
+  {d:"Try: `claude --headless -p 'Generate tests for all functions in src/utils/ that don't have test files. Open a PR when done.'` Close your laptop. Review the PR when you're back.",u:"https://ghuntley.com/loop/"},
+  {d:"`git worktree add ../agent-task feature/my-task` lets agents work in a separate branch without touching your working tree. The agent makes a mess in isolation; you review the diff.",u:"https://git-scm.com/docs/git-worktree"},
+  {d:"Machine-checkable: 'All tests pass and no TypeScript errors' is checkable. 'The code looks clean' is not. Write success criteria as a shell command the agent runs itself.",u:null},
+],month:[
+  {d:"Three agents, three worktrees, three tasks in parallel: feature implementation, test generation, documentation. They don't coordinate yet — that's fine. Parallelism alone is the gain.",u:null},
+  {d:"Orchestrator minimum: task description, status (queued/running/done/failed), output location. Even a flat JSON file works. The goal is knowing what's running without checking manually.",u:null},
+  {d:"Research: Gemini 2.5 Pro (free, 1M context) for reading large codebases. Implementation: Opus 4.5. Review: Sonnet 4.5. Never use the same model for implementation and review.",u:null},
+]},
+7:{week:[
+  {d:"Set a task with clear success criteria, start the agent, close your laptop for 4+ hours. What failed? What was unexpected? This diagnostic tells you exactly what your harness is still missing.",u:null},
+  {d:"Reviewer prompt: 'Review this diff against CLAUDE.md conventions. List violations only — no praise. Be specific about file and line.' A different model means a different failure mode.",u:null},
+  {d:"On every merge to main, a CI agent reads the git diff, updates CLAUDE.md if new patterns emerge, and opens a PR. This makes your rules file self-maintaining.",u:null},
+],month:[
+  {d:"Full pipeline: queue_task.sh adds to queue.json → dispatch.sh launches `claude --headless` with Opus → output to prs/ → Sonnet review agent opens a PR on pass. This can run overnight.",u:null},
+  {d:"Claude Code Sub-Agents: experimental but real. Enable with `CLAUDE_AGENT_TEAMS=1`. Start on a sandboxed project where a failed run has zero blast radius.",u:"https://code.claude.com/docs/en/sub-agents"},
+  {d:"Measure before and after: lines shipped per week, PRs merged, features delivered. Level 7 practitioners consistently report 3–5x output with the same engineering hours.",u:null},
+]},
+8:{week:[
+  {d:"Claude Code Sub-Agents (`CLAUDE_AGENT_TEAMS=1`) is the only commercially available tool approaching this level. Use a sandboxed throwaway project. Document what breaks — this knowledge barely exists.",u:"https://code.claude.com/docs/en/sub-agents"},
+  {d:"Write a postmortem after every agent team run: what was the first failure, what cascaded, what did the agents do that you didn't expect. This becomes your coordination protocol.",u:null},
+  {d:"CI must catch regressions from parallel agent work. Run the full integration suite on every branch — not just changed files. Parallel agents create cross-branch regression patterns that unit tests miss.",u:null},
+],month:[
+  {d:"Hub-free: agents claim from a shared task store, lock the task, complete it, unlock. AutoGen has a reference implementation of this claim protocol worth studying.",u:"https://github.com/microsoft/autogen"},
+  {d:"Trust domain isolation: agent process (designated read/write paths only), generated code (sandboxed, no network), secrets (env-injected, never filesystem). These three must never collapse.",u:null},
+  {d:"Fewer than 100 people have run Level 8 in production. A blog post, a repo, a Latent Space episode pitch. The community is waiting for practitioners to write this up.",u:"https://latent.space"},
+]},
+};
+
+// ═══════════════════════════════════════
+// QUESTIONS
+// ═══════════════════════════════════════
+const QS = [
+{q:"How do you typically start a coding task with AI?",
+ a:[{t:"Tab-complete suggestions as I type",s:0},{t:"Chat with an AI in my IDE, describe what I want",s:1},{t:"Carefully craft my prompt with the right context and constraints",s:2},{t:"Kick it off and let my background agents handle it while I do something else",s:3}]},
+{q:"When an LLM gives you a bad output, what's your first instinct?",
+ a:[{t:"The model isn't smart enough for this",s:0},{t:"I probably gave it too much or too little context",s:1},{t:"I need to update my rules file so this doesn't happen again",s:2},{t:"The feedback loop should have caught this automatically",s:3}]},
+{q:"What does your CLAUDE.md / .cursorrules look like?",
+ a:[{t:"I don't have one",s:0},{t:"A carefully curated set of instructions",s:1},{t:"A living document I update every time I learn something new",s:2},{t:"A concise table of contents pointing to structured docs the agent discovers on its own",s:3}]},
+{q:"How do you use tools and MCPs with your coding agent?",
+ a:[{t:"I don't, or I've only tried a couple",s:0},{t:"I use several MCPs and have built or customized skills for my workflow",s:1},{t:"My agent has access to CI, testing, browser, and can validate its own output",s:2},{t:"My background agents use different tool sets depending on the task",s:3}]},
+{q:"How do you handle code review on AI-generated PRs?",
+ a:[{t:"I review every PR manually",s:0},{t:"I skim the diff and trust the model for straightforward changes",s:1},{t:"I have an automated review skill that runs linters, checks patterns, and flags issues",s:2},{t:"A different model reviews the implementation — never the same one that wrote it",s:3}]},
+{q:"What happens when you step away from your computer?",
+ a:[{t:"All coding stops",s:0},{t:"I might leave a long-running agent going, but I check back frequently",s:1},{t:"Background agents keep working, and I review their PRs when I'm back",s:2},{t:"Agent teams coordinate and merge work autonomously",s:3}]},
+{q:"How many AI agents are working on your codebase right now?",
+ a:[{t:"One — the one I'm chatting with",s:0},{t:"One, but it's well-equipped with tools and context",s:1},{t:"Several, orchestrated by a dispatcher that tracks progress",s:2},{t:"A team that coordinates with each other directly",s:3}]}
+];
+
+const RANGES = [[0,2,1],[3,5,2],[6,8,3],[9,11,4],[12,14,5],[15,17,6],[18,19,7],[20,21,8]];
+
+// ═══════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════
+let ST = { level: null, answers: new Array(7).fill(null), cur: 0, rtab: 'overview' };
+let isDark = false;
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'explore') renderExplore();
+  if (id === 'result')  renderResult();
+  updateBadges();
+}
+
+function updateBadges() {
+  ['r','e','l'].forEach(id => {
+    const el = document.getElementById('badge-' + id);
+    if (!el) return;
+    if (ST.level) { el.textContent = 'Level ' + ST.level; el.style.display = 'inline'; }
+    else { el.style.display = 'none'; }
+  });
+  const rl = document.getElementById('result-link-e');
+  if (rl) rl.style.display = ST.level ? 'inline' : 'none';
+  const lr = document.getElementById('lnav-result');
+  if (lr) lr.style.display = ST.level ? 'inline' : 'none';
+  // dark buttons
+  document.querySelectorAll('.nav-icon-btn').forEach(b => {
+    b.textContent = isDark ? 'Light' : 'Dark';
+  });
+}
+
+function startQuiz() {
+  ST.answers = new Array(7).fill(null);
+  ST.cur = 0;
+  renderQ();
+  showView('quiz');
+}
+
+function toggleDark() {
+  isDark = !isDark;
+  document.body.classList.toggle('dark', isDark);
+  localStorage.setItem('agentic-dark', isDark ? '1' : '');
+  updateBadges();
+}
+
+// ═══════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════
+function renderQ() {
+  const q = QS[ST.cur];
+  const n = ST.cur + 1;
+  document.getElementById('qcounter').textContent = n + ' / ' + QS.length;
+  document.getElementById('qfill').style.width = (n / QS.length * 100) + '%';
+  document.getElementById('qq').textContent = q.q;
+  document.getElementById('qopts').innerHTML = q.a.map((a,i) =>
+    `<button class="quiz-opt${ST.answers[ST.cur]===i?' sel':''}" onclick="pick(${i})">${a.t}</button>`
+  ).join('');
+  const nb = document.getElementById('qnext');
+  nb.textContent = n === QS.length ? 'See My Result' : 'Next';
+  nb.disabled = ST.answers[ST.cur] === null;
+  document.getElementById('qback').style.visibility = ST.cur === 0 ? 'hidden' : 'visible';
+}
+
+function pick(i) { ST.answers[ST.cur] = i; renderQ(); }
+
+function quizNext() {
+  if (ST.answers[ST.cur] === null) return;
+  if (ST.cur === QS.length - 1) {
+    let total = 0;
+    ST.answers.forEach((a, qi) => { if (a !== null) total += QS[qi].a[a].s; });
+    ST.level = 8;
+    for (const [min, max, lvl] of RANGES) { if (total >= min && total <= max) { ST.level = lvl; break; } }
+    saveState();
+    ST.rtab = 'overview';
+    showView('result');
+  } else { ST.cur++; renderQ(); }
+}
+function quizBack() { if (ST.cur > 0) { ST.cur--; renderQ(); } }
+
+// ═══════════════════════════════════════
+// RESULT
+// ═══════════════════════════════════════
+function renderResult() {
+  if (!ST.level) return;
+  const d = DATA[ST.level - 1];
+  const c = C[ST.level];
+  const nxt = ST.level < 8 ? DATA[ST.level] : null;
+  const gaps = GAPS[ST.level];
+  const prompts = [...PROMPTS[ST.level], PROMPTS4[ST.level]];
+  const ex = EXTRA[ST.level];
+
+  const tabs = [
+    {id:'overview', label:'Overview'},
+    {id:'gaps',     label:'Gap Analysis'},
+    {id:'plan',     label:'Action Plan'},
+    {id:'prompts',  label:'Prompts'},
+    {id:'harness',  label:'Harness'},
+  ];
+
+  const tabBar = `<div class="rtab-bar">${tabs.map(t =>
+    `<button class="rtab${ST.rtab===t.id?' active':''}" onclick="switchRTab('${t.id}')">${t.label}</button>`
+  ).join('')}</div>`;
+
+  // Overview
+  const overviewPanel = `
+    ${renderCongratsBanner(ST.level, c, 'result-cycle-banner')}
+    <div class="result-hero">
+      <div class="result-badge" style="background:${c}12;border-color:${c}40">
+        <div class="result-badge-n" style="color:${c}">${ST.level}</div>
+        <div class="result-badge-w">Level</div>
+      </div>
+      <div>
+        <div class="result-tag">Your Assessment Result</div>
+        <div class="result-name" style="color:${c}">${d.name}</div>
+        <div class="result-tagline">${d.tagline}</div>
+      </div>
+    </div>
+    <div style="margin-bottom:20px">
+      <div class="result-sigs-h">You're at this level if…</div>
+      ${ex.signals.map(s=>`<div class="result-sig">${s}</div>`).join('')}
+    </div>
+    <div class="result-grid">
+      <div class="result-card">
+        <div class="result-card-h">What got you here</div>
+        <ul>${d.here.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>
+      <div class="result-card">
+        <div class="result-card-h">What's holding you back</div>
+        <ul>${d.back.map(i=>`<li>${i}</li>`).join('')}</ul>
+      </div>
+    </div>
+    ${nxt ? `
+    <div class="next-box" style="border-left-color:${C[ST.level+1]}">
+      <div class="next-box-label">Next: Level ${ST.level+1}</div>
+      <div class="next-box-name">${nxt.name}</div>
+      <div class="next-box-text">${d.next}</div>
+    </div>` : `
+    <div class="next-box" style="border-color:${c}40;border-left-color:${c}">
+      <div class="next-box-name" style="color:${c}">You're at the frontier.</div>
+      <div class="next-box-text">${d.next.replace(/^You're at the frontier\.\s*/,'')}</div>
+    </div>`}
+    <div class="result-actions">
+      <button class="btn btn-primary" onclick="switchRTab('plan')">Action Plan</button>
+      <button class="btn btn-secondary" onclick="showView('explore')">All Levels</button>
+      <button class="btn btn-secondary" onclick="startQuiz()">Retake</button>
+      <button class="share-btn" id="share-btn" onclick="shareResult()">Share Result</button>
+    </div>`;
+
+  // Gaps
+  const gapRows = gaps.map(g => `
+    <div class="gap-section">
+      <div class="gap-cat-head">
+        <div class="gap-dot" style="background:${g.status==='strong'?'#00a855':g.status==='partial'?'#e8a30c':'#FD542F'}"></div>
+        <div class="gap-cat-name">${g.cat}</div>
+        <span class="gap-status ${g.status}">${g.status==='strong'?'Strong':g.status==='partial'?'Partial':'Gap'}</span>
+      </div>
+      <div class="gap-items">${g.items.map(i=>`<div class="gap-item">${i}</div>`).join('')}</div>
+    </div>`).join('');
+
+  const gapsPanel = `
+    <p class="tab-intro">Here's where you stand across the key dimensions of agentic engineering — specific gaps that will most accelerate your progress to Level ${Math.min(ST.level+1,8)}.</p>
+    ${gapRows}`;
+
+  // Plan
+  const pd = PLAN_DETAIL[ST.level] || {week:[],month:[]};
+  function planItem(text, det, sec, i) {
+    const hasDet = det && det.d;
+    return `<div class="plan-item${hasDet?' has-detail':''}" id="plan-item-${sec}-${i}"${hasDet?` onclick="togglePlanItem('${sec}',${i})"`:''}>
+      <div class="plan-n">${i+1}</div>
+      <div style="flex:1">${text}${hasDet?`<div class="plan-detail">${det.d}${det.u?` <a href="${det.u}" target="_blank" rel="noopener">Learn more →</a>`:''}` +`</div>`:''}</div>
+      ${hasDet?`<span class="plan-item-chevron">▾</span>`:''}
+    </div>`;
+  }
+  const planPanel = `
+    <p class="tab-intro">Tap any action item to expand it with a deeper explanation and relevant resources.</p>
+    <div class="plan-sec">
+      <div class="plan-sec-head"><div class="plan-icon">→</div><div class="plan-sec-title">This Week</div></div>
+      <div class="plan-items">${d.week.map((a,i)=>planItem(a, pd.week[i], 'week', i)).join('')}</div>
+    </div>
+    <div class="plan-sec">
+      <div class="plan-sec-head"><div class="plan-icon">◎</div><div class="plan-sec-title">This Month</div></div>
+      <div class="plan-items">${d.month.map((a,i)=>planItem(a, pd.month[i], 'month', i)).join('')}</div>
+    </div>
+    <div class="plan-sec">
+      <div class="plan-sec-head"><div class="plan-icon">↗</div><div class="plan-sec-title">Resources</div></div>
+      <div class="res-grid">${d.res.map(r=>`<a class="res-card" href="${r.u}" target="_blank" rel="noopener"><div class="res-type">${r.ty}</div><div class="res-title">${r.t}</div><div class="res-src">${r.s}</div></a>`).join('')}</div>
+    </div>
+    <div class="plan-sec">
+      <div class="plan-sec-head"><div class="plan-icon">⭐</div><div class="plan-sec-title">GitHub Repos</div></div>
+      <div class="repo-grid">${ex.repos.map(r=>`<a class="repo-card" href="${r.url}" target="_blank" rel="noopener"><div class="repo-stars">${r.stars}</div><div class="repo-name">${r.name}</div><div class="repo-desc">${r.desc}</div></a>`).join('')}</div>
+    </div>
+    <div class="plan-sec">
+      <div class="plan-sec-head"><div class="plan-icon">✉</div><div class="plan-sec-title">Newsletters to Follow</div></div>
+      <div class="nl-row">${ex.newsletters.map(n=>`<a class="nl-pill" href="${n.url}" target="_blank" rel="noopener">${n.name}</a>`).join('')}</div>
+    </div>`;
+
+  // Prompts
+  const promptCards = prompts.map((p,idx) => `
+    <div class="prompt-card" id="prompt-card-${idx}">
+      <div class="prompt-card-head" onclick="togglePromptCard(${idx})">
+        <div style="flex:1;min-width:0">
+          <div class="prompt-card-name">${p.name}</div>
+          <div class="prompt-card-desc">${p.desc}</div>
+        </div>
+        <span class="prompt-card-chevron">▾</span>
+        <button class="copy-btn" id="pcopy-${idx}" onclick="event.stopPropagation();copyPromptCard(${idx})">Copy</button>
+      </div>
+      <div class="prompt-body" id="pbody-${idx}">${escHtml(p.body)}</div>
+    </div>`).join('');
+
+  const promptsPanel = `
+    <p class="tab-intro">Four ready-to-use prompts calibrated for Level ${ST.level}. Click any prompt to expand it, then copy into Claude, ChatGPT, Gemini, or any model — fill in the [BRACKETED] fields with your specifics.</p>
+    ${promptCards}`;
+
+  // Harness
+  const harnessBash = `#!/bin/bash
+# Run in your terminal → paste output + the prompt below into any LLM
+# Gives a personalized gap analysis based on YOUR actual harness
+
+echo "=== CLAUDE.md (first 120 lines) ==="
+head -120 ~/.claude/CLAUDE.md 2>/dev/null || echo "(not found)"
+
+echo ""
+echo "=== SKILLS INSTALLED ==="
+ls ~/.claude/skills/ 2>/dev/null | tr '\\n' ', ' || echo "(none)"
+
+echo ""
+echo "=== GIT LOG (last 20 commits) ==="
+git log --oneline -20 2>/dev/null || echo "(not a git repo)"
+
+echo ""
+echo "=== MCP SERVERS ==="
+python3 -c "
+import json, os
+for p in ['~/.claude/settings.json', '~/.config/claude/settings.json']:
+  fp = os.path.expanduser(p)
+  if os.path.exists(fp):
+    d = json.load(open(fp))
+    mcps = list(d.get('mcpServers', {}).keys())
+    print('\\n'.join(mcps) if mcps else '(none configured)')
+    break
+else: print('(settings.json not found)')
+" 2>/dev/null
+
+echo ""
+echo "=== HOOKS CONFIGURED ==="
+python3 -c "
+import json, os
+p = os.path.expanduser('~/.claude/settings.json')
+if os.path.exists(p):
+  d = json.load(open(p))
+  hooks = d.get('hooks', {})
+  [print(f'{k}: {len(v)} hook(s)') for k,v in hooks.items()] if hooks else print('(none)')
+else: print('(settings.json not found)')
+" 2>/dev/null`;
+
+  const harnessPromptTxt = `You are an expert in agentic engineering. Analyze this developer's actual Claude Code harness using the 8 Levels framework: https://www.bassimeledath.com/blog/levels-of-agentic-engineering
+
+Current self-assessment: Level ${ST.level} (${d.name})
+
+Please provide:
+1. Level verification (1–8) with a 2-sentence rationale based on their actual setup
+2. The 3 most specific blockers preventing Level ${Math.min(ST.level+1,8)} — based on gaps in their actual harness, not generic advice
+3. A concrete 30-day plan (specific tools, commands, exact order) calibrated to what they already have
+4. 5 resources that directly apply to their specific setup
+5. The single highest-leverage thing they could do TODAY
+
+Keep it direct. Assume they're a senior engineer who wants specifics.
+
+─── THEIR HARNESS ──────────────────
+[PASTE THE SCRIPT OUTPUT HERE]
+────────────────────────────────────`;
+
+  const idePrompt = `Analyze my agentic engineering setup against the 8 Levels of Agentic Engineering framework.
+Reference: https://www.bassimeledath.com/blog/levels-of-agentic-engineering
+My quiz self-assessment: Level ${ST.level}
+
+Please do the following:
+1. Read ~/.claude/CLAUDE.md (or ./CLAUDE.md if no global file exists)
+2. Run: ls ~/.claude/skills/ 2>/dev/null | head -40
+3. Run: git log --oneline -20 2>/dev/null
+4. Run: python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.claude/settings.json'))); print('MCPs:', list(d.get('mcpServers',{}).keys())); print('Hooks:', list(d.get('hooks',{}).keys()))" 2>/dev/null
+
+Then give me:
+1. Level verification (1–8) with a 2-sentence rationale based on what you actually read — not what I told you
+2. My top 3 specific blockers preventing Level ${Math.min(ST.level+1,8)} — based on gaps in my actual files
+3. A 30-day action plan calibrated to my actual setup (specific commands, repos, tools — in order)
+4. The single highest-leverage thing I can do TODAY
+
+Be direct. Assume senior engineer. No encouragement — just diagnosis and specifics.`;
+
+  const harnessPanel = `
+    <p class="tab-intro">Two ways to get a personalized analysis of your actual harness — no API key required for either.</p>
+    <div class="h-divider">Option A — Run in Your IDE</div>
+    <p style="font-size:13px;font-weight:300;color:var(--text-2);line-height:1.65;margin-bottom:14px">Paste this prompt directly into Claude Code (CLI or IDE). It reads your actual files and gives a personalized gap analysis.</p>
+    <div class="ide-box">
+      <div class="ide-box-head">
+        <div><div class="ide-box-title">Run in Claude Code</div><div class="ide-box-sub">Paste into Claude Code — it reads your CLAUDE.md, skills, git log, and MCPs automatically</div></div>
+        <button class="copy-btn" id="hcopy-ide" onclick="copyHarness('hcopy-ide','ide')">Copy</button>
+      </div>
+      <pre class="ide-box-body">${escHtml(idePrompt)}</pre>
+    </div>
+    <div class="h-divider">Option B — Any Model</div>
+    <p style="font-size:13px;font-weight:300;color:var(--text-2);line-height:1.65;margin-bottom:14px">Run the snapshot script in your terminal, then paste the output + the analysis prompt into Claude, ChatGPT, or Gemini.</p>
+    <div class="harness-block" style="margin-bottom:12px">
+      <div class="harness-block-head">
+        <div class="harness-block-title">1. Environment Snapshot Script</div>
+        <div style="display:flex;gap:8px">
+          <button class="copy-btn" id="hcopy-script" onclick="copyHarness('hcopy-script','script')">Copy</button>
+          <button class="toggle-btn" id="htoggle-script" onclick="toggleHarness('script')">Show</button>
+        </div>
+      </div>
+      <div class="harness-body" id="hbody-script"><pre class="harness-code">${escHtml(harnessBash)}</pre></div>
+    </div>
+    <div class="harness-block">
+      <div class="harness-block-head">
+        <div class="harness-block-title">2. Analysis Prompt (model-agnostic)</div>
+        <div style="display:flex;gap:8px">
+          <button class="copy-btn" id="hcopy-prompt" onclick="copyHarness('hcopy-prompt','prompt')">Copy</button>
+          <button class="toggle-btn" id="htoggle-prompt" onclick="toggleHarness('prompt')">Show</button>
+        </div>
+      </div>
+      <div class="harness-body" id="hbody-prompt"><pre class="harness-code">${escHtml(harnessPromptTxt)}</pre></div>
+    </div>`;
+
+  const panels = {overview: overviewPanel, gaps: gapsPanel, plan: planPanel, prompts: promptsPanel, harness: harnessPanel};
+
+  document.getElementById('result-body').innerHTML = `
+  <div class="result-wrap">
+    ${tabBar}
+    ${Object.entries(panels).map(([id, html]) =>
+      `<div class="rtab-panel${ST.rtab===id?' active':''}" id="rtab-${id}">${html}</div>`
+    ).join('')}
+  </div>`;
+
+  // Start banner cycle: congrats ↔ key shift
+  startBannerCycle('result-cycle-banner', [
+    { label: `Level ${ST.level}`, text: CONGRATS[ST.level] || '' },
+    { label: 'Key Shift',         text: ex.shift }
+  ]);
+
+  // Store prompt bodies for copy
+  window.__prompts = prompts;
+  // Store harness texts for copy (avoids JSON-in-HTML-attribute escaping bug)
+  window.__harness = { script: harnessBash, prompt: harnessPromptTxt, ide: idePrompt };
+}
+
+function switchRTab(tab) {
+  ST.rtab = tab;
+  document.querySelectorAll('.rtab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.rtab').forEach(t => t.classList.toggle('active', t.textContent.trim().toLowerCase() === tab || t.getAttribute('onclick').includes("'"+tab+"'")));
+  const panel = document.getElementById('rtab-' + tab);
+  if (panel) panel.classList.add('active');
+}
+
+function copyPromptCard(idx) {
+  const p = window.__prompts[idx];
+  const btn = document.getElementById('pcopy-' + idx);
+  navigator.clipboard.writeText(p.body).then(() => {
+    btn.textContent = 'Copied!'; btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 2200);
+  });
+}
+
+function copyHarness(btnId, key) {
+  const btn = document.getElementById(btnId);
+  const text = (window.__harness || {})[key] || '';
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!'; btn.classList.add('ok');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 2200);
+  });
+}
+
+function togglePromptCard(idx) {
+  const card = document.getElementById('prompt-card-' + idx);
+  if (card) card.classList.toggle('open');
+}
+
+function togglePlanItem(sec, idx) {
+  const item = document.getElementById('plan-item-' + sec + '-' + idx);
+  if (item) item.classList.toggle('open');
+}
+
+function toggleHarness(key) {
+  const body = document.getElementById('hbody-' + key);
+  const btn  = document.getElementById('htoggle-' + key);
+  const open = body.classList.toggle('open');
+  btn.textContent = open ? 'Hide' : 'Show';
+  btn.classList.toggle('open', open);
+}
+
+const STAIR_COLORS = {1:'#5e8fa3',2:'#6ea1b5',3:'#7cb3c5',4:'#6fa899',5:'#9485bf',6:'#bf9470',7:'#c07555',8:'#b05e3f'};
+
+function showSharedView(n) {
+  const d = DATA.find(x => x.id === n);
+  if (!d) return;
+  const col = STAIR_COLORS[n];
+  document.getElementById('shared-card-body').innerHTML = `
+    <div class="shared-badge" style="background:${col}">
+      <div class="shared-badge-n">${n}</div>
+      <div class="shared-badge-w">Level</div>
+    </div>
+    <div class="shared-label">Assessment Result</div>
+    <div class="shared-name" style="color:${col}">${d.name}</div>
+    <div class="shared-tagline">${d.tagline}</div>
+    <div class="shared-summary">${d.summary}</div>
+    <div class="shared-actions">
+      <button class="btn btn-primary" onclick="startQuiz()">Take the Assessment</button>
+      <button class="btn btn-secondary" onclick="showLevelDetail(${n})">Full Detail →</button>
+    </div>
+    <div class="shared-source">
+      <span style="display:flex;align-items:center;gap:6px">
+        <span class="shared-source-label">Based on article by</span>
+        <a href="https://www.bassimeledath.com/blog/levels-of-agentic-engineering" target="_blank" rel="noopener">Bassim Eledath →</a>
+      </span>
+      <a href="https://github.com/fuentes-studio" target="_blank" rel="noopener" class="shared-built-by">Built by Fuentes Studio</a>
+    </div>
+  `;
+  showView('shared');
+}
+
+function shareResult() {
+  const url = location.origin + location.pathname + '#l=' + ST.level;
+  const btn = document.getElementById('share-btn');
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = 'Link Copied!'; btn.classList.add('ok');
+    history.replaceState(null, '', '#l=' + ST.level);
+    setTimeout(() => { btn.textContent = 'Share Result'; btn.classList.remove('ok'); }, 2500);
+  });
+}
+
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ═══════════════════════════════════════
+// EXPLORE
+// ═══════════════════════════════════════
+function renderExplore() {
+  // Build progress track SVG
+  const W = 680, H = 56, R = 14, pad = 40, gap = (W - pad*2) / 7;
+  const trackSvg = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px;display:block" xmlns="http://www.w3.org/2000/svg">
+    ${[1,2,3,4,5,6,7,8].map((n,i) => {
+      const x = pad + i * gap;
+      const isCurrent = ST.level === n;
+      const isPast = ST.level && n < ST.level;
+      const col = C[n];
+      return `
+      <line x1="${x}" y1="${H/2}" x2="${x+gap}" y2="${H/2}" stroke="${isPast||isCurrent?col:'#dedee2'}" stroke-width="2" ${i===7?'display="none"':''}/>
+      <circle cx="${x}" cy="${H/2}" r="${isCurrent?R+2:R}" fill="${isCurrent?col:isPast?col+'44':'var(--bg)'}" stroke="${isCurrent||isPast?col:'#dedee2'}" stroke-width="${isCurrent?2.5:1.5}" style="cursor:pointer" onclick="showLevelDetail(${n})"/>
+      <text x="${x}" y="${H/2+1}" text-anchor="middle" dominant-baseline="middle" style="font-family:'Work Sans',sans-serif;font-size:${isCurrent?12:11}px;font-weight:${isCurrent?700:500};fill:${isCurrent?'#fff':isPast?col:'var(--text-3)'};pointer-events:none">${n}</text>
+      ${isCurrent?`<text x="${x}" y="${H/2+R+10}" text-anchor="middle" style="font-family:'Work Sans',sans-serif;font-size:9px;font-weight:600;fill:${col};pointer-events:none">YOU</text>`:''}
+      `;
+    }).join('')}
+  </svg>`;
+
+  document.getElementById('explore-body').innerHTML = `
+  <div class="explore-wrap">
+    <div style="font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">All 8 Levels</div>
+    <div class="explore-h">The Full Progression</div>
+    <div class="explore-sub">${ST.level ? `You assessed at Level ${ST.level}. Click any level to explore it.` : 'Click any level for detail, or take the assessment to see where you land.'}</div>
+    <div class="level-track">${trackSvg}</div>
+    <div class="lvl-grid">
+      ${DATA.map(d=>{const ex=EXTRA[d.id];return`
+      <div class="lvl-card ${ST.level===d.id?'yours':''}" style="border-top-color:${C[d.id]}" onclick="showLevelDetail(${d.id})">
+        <div class="lvl-n">Level ${d.id}</div>
+        <div class="lvl-name" style="color:${C[d.id]}">${d.name}</div>
+        <div class="lvl-brief">${d.tagline}</div>
+        <div class="lvl-expand">
+          <div class="lvl-expand-inner">
+            <div class="lvl-expand-blurb">${ex.blurb}</div>
+            <div class="lvl-expand-sigs">${ex.signals.map(s=>`<div class="lvl-expand-sig">${s}</div>`).join('')}</div>
+            <span class="lvl-expand-cta">Explore →</span>
+          </div>
+        </div>
+      </div>`;}).join('')}
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════
+// LEVEL DETAIL
+// ═══════════════════════════════════════
+function showLevelDetail(id) {
+  const d = DATA[id - 1];
+  const c = C[id];
+  const prev = id > 1 ? DATA[id-2] : null;
+  const next = id < 8 ? DATA[id] : null;
+  document.getElementById('level-body').innerHTML = `
+  <div class="ldet-wrap">
+    <div class="ldet-num" style="color:${c}">${id}</div>
+    <div style="font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:${c};margin-bottom:6px">Level ${id}</div>
+    <div class="ldet-name">${d.name}</div>
+    <div class="ldet-tagline">${d.tagline}</div>
+    <div class="ldet-sec">
+      <div class="ldet-sec-title">From the article</div>
+      <div class="ldet-blurb">${d.summary}</div>
+    </div>
+    <div class="ldet-sec">
+      <div class="ldet-sec-title">What gets you to this level</div>
+      <div class="ldet-items">${d.here.map(i=>`<div class="ldet-item"><div class="ldet-dot" style="background:${c}"></div><div>${i}</div></div>`).join('')}</div>
+    </div>
+    <div class="ldet-sec">
+      <div class="ldet-sec-title">What prevents the next level</div>
+      <div class="ldet-items">${d.back.map(i=>`<div class="ldet-item"><div class="ldet-dot" style="background:var(--text-3)"></div><div>${i}</div></div>`).join('')}</div>
+    </div>
+    <div class="ldet-sec">
+      <div class="ldet-sec-title">Resources</div>
+      <div class="res-grid">${d.res.map(r=>`<a class="res-card" href="${r.u}" target="_blank" rel="noopener"><div class="res-type">${r.ty}</div><div class="res-title">${r.t}</div><div class="res-src">${r.s}</div></a>`).join('')}</div>
+    </div>
+    ${ST.level === id ? `
+    <div style="background:var(--bg-2);border:1px solid ${c}40;border-left:3px solid ${c};border-radius:var(--r);padding:18px;margin-top:8px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:${c};margin-bottom:7px">This is your level</div>
+      <div style="font-size:13px;font-weight:300;color:var(--text-2);line-height:1.65;margin-bottom:14px">${d.next}</div>
+      <button class="btn btn-primary" onclick="showView('result')">See Full Analysis</button>
+    </div>` : ''}
+    <div class="ldet-nav">
+      ${prev ? `<button class="btn btn-secondary" onclick="showLevelDetail(${prev.id})">← ${prev.name}</button>` : '<div></div>'}
+      ${next ? `<button class="btn btn-secondary" onclick="showLevelDetail(${next.id})">${next.name} →</button>` : '<div></div>'}
+    </div>
+  </div>`;
+  showView('level');
+}
+
+// ═══════════════════════════════════════
+// PERSISTENCE
+// ═══════════════════════════════════════
+function saveState() {
+  localStorage.setItem('agentic-v3', JSON.stringify({ level: ST.level, answers: ST.answers }));
+  if (ST.level) history.replaceState(null, '', '#l=' + ST.level);
+}
+
+function loadState() {
+  // Dark mode
+  if (localStorage.getItem('agentic-dark')) {
+    isDark = true;
+    document.body.classList.add('dark');
+  }
+  // Level from URL hash
+  const hash = location.hash.match(/#l=(\d)/);
+  if (hash) {
+    const n = parseInt(hash[1]);
+    if (n >= 1 && n <= 8) { ST.level = n; updateBadges(); showSharedView(n); return; }
+  }
+  // Level from localStorage
+  try {
+    const saved = JSON.parse(localStorage.getItem('agentic-v3') || 'null');
+    if (saved && saved.level) { ST.level = saved.level; if (saved.answers) ST.answers = saved.answers; updateBadges(); }
+  } catch(e) {}
+}
+
+loadState();
+renderStair();
+
+const CONGRATS = {
+  1: "You've started. That's more than most.",
+  2: "You're building real habits. Keep going.",
+  3: "You think in context. That's a genuine edge.",
+  4: "You're compounding. The gap widens every session.",
+  5: "Your agent has real tools. That's a multiplier.",
+  6: "You've closed the loop. The agent works for you.",
+  7: "You've stepped off the keyboard. That's the shift.",
+  8: "You're at the frontier. There's barely a map here."
+};
+
+function renderCongratsBanner(level, color, cycleId) {
+  const id = cycleId ? `id="${cycleId}"` : '';
+  return `<div class="congrats-banner" ${id} style="background:${color}18;border-color:${color}44">
+    <div class="congrats-dot" style="background:${color}"></div>
+    <div class="congrats-inner">
+      <span class="congrats-label" style="color:${color}">Level ${level}</span>
+      <span class="congrats-text">${CONGRATS[level] || ''}</span>
+    </div>
+  </div>`;
+}
+
+function startBannerCycle(id, msgs) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const inner = el.querySelector('.congrats-inner');
+  if (!inner) return;
+  let idx = 0;
+  setInterval(() => {
+    // Slide up + fade out
+    inner.style.transform = 'translateY(-10px)';
+    inner.style.opacity = '0';
+    setTimeout(() => {
+      idx = (idx + 1) % msgs.length;
+      el.querySelector('.congrats-label').textContent = msgs[idx].label;
+      el.querySelector('.congrats-text').textContent  = msgs[idx].text;
+      // Snap to below without transition, then animate in
+      inner.style.transition = 'none';
+      inner.style.transform  = 'translateY(10px)';
+      inner.style.opacity    = '0';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        inner.style.transition = '';
+        inner.style.transform  = 'translateY(0)';
+        inner.style.opacity    = '1';
+      }));
+    }, 280);
+  }, 4500);
+}
+
+// ═══════════════════════════════════════
+// STAIR
+// ═══════════════════════════════════════
+function renderStair() {
+  const STEPS = [
+    {n:1, lbl:'Tab Complete',        tag:'AI fills in the blanks you leave.',         l:0,   b:6,   c:'#5e8fa3'},
+    {n:2, lbl:'Agent IDE',           tag:'Multi-file chat. Your whole codebase.',     l:45,  b:50,  c:'#6ea1b5'},
+    {n:3, lbl:'Context Engineering', tag:'Every token fights for its place.',         l:90,  b:94,  c:'#7cb3c5'},
+    {n:4, lbl:'Compounding Engineering', tag:'Every session gets better than the last.',  l:135, b:138, c:'#6fa899'},
+    {n:5, lbl:'MCP & Skills',        tag:'The LLM can act on your systems.',          l:180, b:182, c:'#9485bf'},
+    {n:6, lbl:'Harness Engineering', tag:'Agent sees what it built and iterates.',    l:225, b:226, c:'#bf9470'},
+    {n:7, lbl:'Background Agents',   tag:'Work happens while you sleep.',             l:270, b:270, c:'#c07555'},
+    {n:8, lbl:'Autonomous Teams',    tag:"Nobody's mastered this level yet.",         l:315, b:314, c:'#b05e3f'},
+  ];
+  const W = 230, EXP = 14;
+  const el = document.getElementById('stair-html');
+  if (!el) return;
+
+  el.innerHTML = STEPS.map((s, i) =>
+    `<div class="stair-outer" id="so-${s.n}" style="left:${s.l}px;bottom:${s.b}px;width:${W}px;animation-delay:${(i*.09).toFixed(2)}s;pointer-events:none">
+      <div class="stair-inner" style="background:${s.c}" onclick="showLevelDetail(${s.n})">
+        <div class="stair-tag">${s.tag}</div>
+        <div class="stair-pill"><span class="stair-sn">${s.n}.</span><span class="stair-sl">${s.lbl}</span></div>
+      </div>
+    </div>`
+  ).join('');
+
+  const outers = [...el.querySelectorAll('.stair-outer')];
+  const inners = [...el.querySelectorAll('.stair-inner')];
+
+  // After entrance animation ends, remove it so CSS transition can own transform freely
+  // Re-enable pointer-events once animation is fully done (last step: 0.63s delay + 0.55s = ~1.25s)
+  outers.forEach(outer => {
+    outer.addEventListener('animationend', () => {
+      outer.style.opacity = '1';
+      outer.style.animation = 'none';
+      outer.style.pointerEvents = '';
+    }, {once: true});
+  });
+
+  inners.forEach((inner, i) => {
+    inner.addEventListener('mouseenter', () => {
+      inner.classList.add('expanded');
+      outers[i].classList.add('hov');
+      outers.slice(i + 1).forEach(o => { o.style.transform = `translateY(-${EXP}px)`; });
+    });
+    inner.addEventListener('mouseleave', () => {
+      inner.classList.remove('expanded');
+      outers[i].classList.remove('hov');
+      outers.forEach(o => { o.style.transform = ''; });
+    });
+  });
+}
+</script>
+
+<div class="built-by"><a href="https://github.com/fuentes-studio" target="_blank" rel="noopener">Built by Fuentes Studio</a></div>
+
+</body></html>
